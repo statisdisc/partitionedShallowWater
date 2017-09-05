@@ -59,8 +59,8 @@ interpolationSchemes
     flux((twoOmega^U)) linear;
     flux(convection(phi,U)) linear;
     
-    interpolate(grad(stable.Uf))  linear;//upwind stable.volFlux;//linearUpwind stable.volFlux linearUpwind; 
-    interpolate(grad(buoyant.Uf)) linear;//upwind buoyant.volFlux;//linearUpwind buoyant.volFlux linearUpwind; 
+    interpolate(grad(stable.Uf))  linearUpwind stable.volFlux linearUpwind; //upwind stable.volFlux;//;
+    interpolate(grad(buoyant.Uf)) linearUpwind buoyant.volFlux linearUpwind; //upwind buoyant.volFlux;//;
     interpolate(stable.u)         linear;
     interpolate(buoyant.u)        linear;
     interpolate(h)                linear;
