@@ -28,5 +28,5 @@ sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 cp init_0/h 0/
 
 # Solve the SWE
-#partitionedShallowWaterFoamAdvExp >& log & sleep 0.01; tail -f log
+partitionedShallowWaterFoamFluxExp >& log & sleep 0.01; tail -f log
 
