@@ -30,7 +30,7 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         1e5; //2e6;
+endTime         1000; //1e5; //2e6;
 
 deltaT          100;
 
@@ -40,9 +40,9 @@ writeInterval   100;//5e3; //1e5;
 
 purgeWrite      0;
 
-writeFormat     ascii;
+writeFormat     binary;
 
-writePrecision  12;
+writePrecision  6;
 
 writeCompression off;
 

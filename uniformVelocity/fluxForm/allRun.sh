@@ -27,6 +27,14 @@ sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 cp init_0/h 0/
 
+# Plot the initial conditions
+gmtFoam -time 0 Usigma
+
 # Solve the SWE
 partitionedShallowWaterFoamFluxExp >& log & sleep 0.01; tail -f log
+
+# Plots of results
+time=100
+gmtFoam -time $time Usigma
+gv $time/Usigma.pdf &
 

@@ -47,8 +47,8 @@ divSchemes
     //Needed for governing equations.
     div(stable.flux,stable.u)        Gauss linear;
     div(buoyant.flux,buoyant.u)      Gauss linear;
-    div(stable.volFlux,stable.h)     Gauss linear;//upwind;
-    div(buoyant.volFlux,buoyant.h)   Gauss linear;//upwind;
+    div(stable.volFlux,stable.h)     Gauss upwind;
+    div(buoyant.volFlux,buoyant.h)   Gauss upwind;
 }
 
 laplacianSchemes

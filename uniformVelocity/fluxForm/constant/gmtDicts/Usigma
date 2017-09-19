@@ -19,11 +19,12 @@ projection2D XY;
 
 FieldsToPlot
 (
-    [buoyant.hSigma filledContours 8.6e3 10.1e3 100 "$GMTU/colours/white_colour_white.cpt"]
-    [buoyant.Uf vectors 1e4 1 "black"]
-    [buoyant.sigma contours 0.99 1 0.001 "black"]
+    [buoyant.sigma filledContours -0.1 0.1 0.01 "$GMTU/colours/red_white_blue.cpt"]
+    [stable.Uf vectors 1e4 5 "black"]
+    [buoyant.Uf vectors 1e4 5 "grey"]
 );
 
 plotBoundaryDots false;
 annotate "minMax 0 -38000";
+region "0/9e6/0/9e6";
 

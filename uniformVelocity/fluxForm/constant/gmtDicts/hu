@@ -22,6 +22,7 @@ FieldsToPlot
     [h filledContours 8e3 11e3 200 "$GMTU/colours/red_white_blue.cpt"]
     [stable.Uf vectors 1e4 5 "black"]
     [buoyant.Uf vectors 1e4 5 "grey"]
+    [buoyant.sigma contours 0.99 1 0.001 "black"]
 );
 
 plotBoundaryDots false;
