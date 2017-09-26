@@ -42,11 +42,11 @@ divSchemes
 {
     default         none;
     //Needed for initial setup.
-    div(phi,U)      Gauss linear;
+    div(phi,U)      Gauss upwind;
     
     //Needed for governing equations.
-    div(stable.flux,stable.u)        Gauss linear;
-    div(buoyant.flux,buoyant.u)      Gauss linear;
+    div(stable.flux,stable.u)        Gauss upwind;
+    div(buoyant.flux,buoyant.u)      Gauss upwind;
     div(stable.volFlux,stable.h)     Gauss upwind;
     div(buoyant.volFlux,buoyant.h)   Gauss upwind;
 }
