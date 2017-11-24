@@ -1,0 +1,74 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          fvSchemes;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         none;
+}
+
+divSchemes
+{
+    default         none;
+    //Needed for governing equations.
+    div(stable.volFlux,stable.h)     Gauss upwind;
+    div(buoyant.volFlux,buoyant.h)   Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default         none;
+}
+
+interpolationSchemes
+{
+    default            none;
+    //Needed for governing equations.
+    interpolate(h)                linear;
+    interpolate(stable.h)         linear;//upwind stable.flux;
+    interpolate(buoyant.h)        linear;//upwind buoyant.flux;
+    interpolate(stable.u)         linear;
+    interpolate(buoyant.u)        linear;
+    flux(div((stable.flux*stable.Uf)))        upwind stable.flux;
+    flux(div((buoyant.flux*buoyant.Uf)))      upwind buoyant.flux;
+}
+
+snGradSchemes
+{
+    default         uncorrected;
+    snGrad(h)       uncorrected;
+}
+
+fluxRequired
+{
+    default         no;
+    h;
+}
+
+
+// ************************************************************************* //
