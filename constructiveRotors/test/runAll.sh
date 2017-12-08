@@ -19,8 +19,12 @@ cp init_0/Uf 0/stable.Uf
 #Create initial partition fraction distributions.
 cp init_0/buoyant.sigma 0/
 cp init_0/stable.sigma 0/
-setFields
-sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
+#setFields
+#sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
+
+#Set permanent transfer term regions between partitions.
+cp init_0/stable.source 0/
+cp init_0/buoyant.source 0/
 
 cp init_0/h 0/
 

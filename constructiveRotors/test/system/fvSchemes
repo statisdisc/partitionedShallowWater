@@ -33,8 +33,10 @@ gradSchemes
     curl((streamFunction*(0,0,1))) Gauss linear;
     linearUpwind Gauss linear;
     
-    grad(stable.h)   Gauss linear;
-    grad(buoyant.h)   Gauss linear;
+    grad(stable.h)        Gauss linear;
+    grad(buoyant.h)       Gauss linear;
+    grad(stable.sigma)    Gauss linear;
+    grad(buoyant.sigma)   Gauss linear;
 }
 
 divSchemes
@@ -57,7 +59,7 @@ laplacianSchemes
 
 interpolationSchemes
 {
-    default            none;
+    default            linear;
     interpolate(U)     linear;
     flux((twoOmega^U)) linear;
     flux(convection(phi,U)) linear;

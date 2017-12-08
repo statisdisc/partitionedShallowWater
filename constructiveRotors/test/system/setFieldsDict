@@ -16,7 +16,7 @@ FoamFile
 
 defaultFieldValues
 (
-    volScalarFieldValue buoyant.sigma 0.
+    volScalarFieldValue buoyant.sigma 0
 );
 
 regions
@@ -25,12 +25,12 @@ regions
     // (does zerogradient on boundaries)
     sphereToCell
     {
-        centre (0 5e3 0);
+        centre (0 2e3 0);
         radius 1e3;
 
         fieldValues
         (
-            volScalarFieldValue buoyant.sigma 0.1
+            volScalarFieldValue buoyant.sigma 1
         );
     }
 

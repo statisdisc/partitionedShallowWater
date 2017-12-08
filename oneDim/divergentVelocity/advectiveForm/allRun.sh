@@ -25,10 +25,11 @@ cp init_0/h 0/
 partitionedShallowWaterFoamAdvExp
 
 # Plots of results
-for ((itime=0;itime<11;itime=itime+1))
+for ((itime=0;itime<101;itime=itime+4))
 {
-export time=$(bc <<<"scale=1; $itime/10" )
+export time=$(bc <<<"scale=2; $itime/100" )
 writeCellDataxyz -time $time buoyant.sigma
+writeCellDataxyz -time $time stable.sigma
 writeCellDataxyz -time $time h
 writeCellDataxyz -time $time buoyant.Uf
 writeCellDataxyz -time $time stable.Uf

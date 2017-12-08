@@ -35,14 +35,17 @@ gradSchemes
     
     grad(stable.h)   Gauss linear;
     grad(buoyant.h)   Gauss linear;
+    
+    grad(stable.sigma)    Gauss linear;
+    grad(buoyant.sigma)   Gauss linear;
 }
 
 divSchemes
 {
     default         none;
     div(phi,U)      Gauss linear;
-    div(stable.volFlux,stable.h)     Gauss upwind; //Gauss vanLeer;
-    div(buoyant.volFlux,buoyant.h)   Gauss upwind; //Gauss upwind;
+    div(stable.volFlux,stable.h)     Gauss vanLeer; //Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.h)   Gauss vanLeer; //Gauss upwind;
 }
 
 laplacianSchemes
@@ -54,16 +57,19 @@ laplacianSchemes
 
 interpolationSchemes
 {
-    default            none;
+    default            linear;
     interpolate(U)     linear;
     flux((twoOmega^U)) linear;
     flux(convection(phi,U)) linear;
     
-    interpolate(grad(stable.Uf))  linear;//upwind stable.volFlux;//linearUpwind stable.volFlux linearUpwind; 
-    interpolate(grad(buoyant.Uf)) linear;//upwind buoyant.volFlux;//linearUpwind buoyant.volFlux linearUpwind; 
+    interpolate(grad(stable.Uf))  linearUpwind stable.volFlux linearUpwind;//upwind stable.volFlux;// 
+    interpolate(grad(buoyant.Uf)) linearUpwind buoyant.volFlux linearUpwind;//upwind buoyant.volFlux;// 
     interpolate(stable.u)         linear;
     interpolate(buoyant.u)        linear;
     interpolate(h)                linear;
+    
+    //interpolate((((0.5*lengthScale)*stable.sigma)|((((36*stable.sigma)*(1-stable.sigma))*exp(((-10*lengthScale)*mag(grad(stable.sigma)))))+1))) linear;
+    //interpolate((((0.5*lengthScale)*buoyant.sigma)|((((36*buoyant.sigma)*(1-buoyant.sigma))*exp(((-10*lengthScale)*mag(grad(buoyant.sigma)))))+1)))  linear;
 }
 
 snGradSchemes
