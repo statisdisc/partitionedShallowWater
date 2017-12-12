@@ -11,10 +11,12 @@ blockMesh
 #Create velocity field for each partition.
 mkdir 0
 setVelocityField
+cp 0/U 0/stable.u
+cp 0/Uf 0/stable.Uf
 mv 0/U 0/buoyant.u
 mv 0/Uf 0/buoyant.Uf
-cp init_0/U 0/stable.u
-cp init_0/Uf 0/stable.Uf
+#cp init_0/U 0/stable.u
+#cp init_0/Uf 0/stable.Uf
 
 #Create initial partition fraction distributions.
 cp init_0/buoyant.sigma 0/

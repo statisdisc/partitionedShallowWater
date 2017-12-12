@@ -7,10 +7,11 @@ FoamFile
     object      velocityFieldDict;
 }
 
-maxVelocity		1.;
-xmax            5000;
-ymax            5000;
-centreOfSystem    (0 5000 0);
+maxVelocity		10;
+zeroVelocityHeight	0;
+maxVelocityHeight	2000;
+solidBodyRotation   (0 0 -0.005236);
+centreOfRotation    (0 5000 0);
 
-type constructiveRotors;
+type solidBodyRotation;
 velocityProfileType HorizontalVelocityProfile;
