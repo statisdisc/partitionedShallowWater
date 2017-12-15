@@ -3,21 +3,20 @@
 # Create the case, run and post-process
 
 # clear out old stuff
-rm -rf [0-9]* [0-9]*[0-9] constant/polyMesh core log legends gmt.history
+rm -rf [0-9]*  constant/polyMesh core log legends gmt.history
 
 #Create mesh.
 blockMesh
 
 #Create velocity field for each partition.
-mkdir 0
-cp init_0/U 0/U
-cp init_0/Uf 0/Uf
+mkdir -p 0
+cp init_0/* 0
 setVelocityField
 mv 0/U 0/u
 
-cp init_0/h 0/
 setBalancedHeight
 mv 0/u 0/U
+mv 0/phi 0/volFlux
 
 # Solve the SWE
 shallowWaterFoamAdvExp >& log & sleep 0.01; tail -f log
