@@ -20,7 +20,7 @@ separateLegend true;
 
 FieldsToPlot
 (
-    [h filledContours 980 1020 1 "$GMTU/colours/red_white_blue.cpt"]
+    [h filledContours 964 1006 1 "$GMTU/colours/red_white_blue.cpt"]
     [Uf vectors 20 5 "black"]
 );
 

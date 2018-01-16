@@ -3,7 +3,7 @@
 # Create the case, run and post-process
 
 # clear out old stuff
-rm -rf [0-9]* [0-9]*[0-9] constant/polyMesh core log legends gmt.history
+rm -rf [0-9]* constant/polyMesh core log legends gmt.history
 
 #Create mesh.
 blockMesh
@@ -23,8 +23,10 @@ mv 0/u 0/U
 
 cp 0/U 0/stable.u
 cp 0/Uf 0/stable.Uf
+cp 0/phi 0/stable.volFlux
 mv 0/U 0/buoyant.u
 mv 0/Uf 0/buoyant.Uf
+mv 0/phi 0/buoyant.volFlux
 #cp init_0/U 0/stable.u
 #cp init_0/Uf 0/stable.Uf
 
@@ -35,8 +37,10 @@ cp init_0/stable.sigma 0/
 #sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 #Set permanent transfer term regions between partitions.
-cp init_0/stable.source 0/
-cp init_0/buoyant.source 0/
+cp init_0/stable.sink 0/
+setFields -dict system/stableSinkDict
+cp init_0/buoyant.sink 0/
+setFields -dict system/buoyantSinkDict
 
 # Solve the SWE
 partitionedShallowWaterFoamAdvExp >& log & sleep 0.01; tail -f log
