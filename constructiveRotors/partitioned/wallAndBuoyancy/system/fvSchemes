@@ -44,8 +44,8 @@ divSchemes
     default         none;
     div(U,u)        Gauss linear;
     div(phi,U)      Gauss linear;
-    div(stable.volFlux,stable.h)     Gauss upwind; //Gauss vanLeer;
-    div(buoyant.volFlux,buoyant.h)   Gauss upwind; //Gauss upwind;
+    div(stable.volFlux,stable.h)     Gauss vanLeer; //Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.h)   Gauss vanLeer; //Gauss upwind;
     
     div(stable.volFlux,stable.u)     Gauss upwind;
     div(buoyant.volFlux,buoyant.u)     Gauss upwind;
@@ -53,7 +53,7 @@ divSchemes
 
 laplacianSchemes
 {
-    default         none;
+    default         Gauss linear uncorrected;
     h                         Gauss linear uncorrected;
     laplacian(streamFunction) Gauss linear uncorrected;
     laplacian(h)              Gauss linear uncorrected;
