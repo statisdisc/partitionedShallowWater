@@ -33,8 +33,8 @@ gradSchemes
     curl((streamFunction*(0,0,1))) Gauss linear;
     linearUpwind Gauss linear;
     
-    grad(stable.h)        Gauss linear;
-    grad(buoyant.h)       Gauss linear;
+    grad(stable.sigmah)        Gauss linear;
+    grad(buoyant.sigmah)       Gauss linear;
     grad(stable.sigma)    Gauss linear;
     grad(buoyant.sigma)   Gauss linear;
 }
@@ -44,8 +44,11 @@ divSchemes
     default         none;
     div(U,u)        Gauss linear;
     div(phi,U)      Gauss linear;
-    div(stable.volFlux,stable.h)     Gauss vanLeer; //Gauss vanLeer;
-    div(buoyant.volFlux,buoyant.h)   Gauss vanLeer; //Gauss upwind;
+    div(stable.volFlux,stable.sigmah)     Gauss vanLeer; //Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.sigmah)   Gauss vanLeer; //Gauss upwind;
+    
+    div(stable.volFlux_0,stable.sigmah_0)     Gauss upwind;
+    div(buoyant.volFlux_0,buoyant.sigmah_0)   Gauss upwind;
     
     div(stable.volFlux,stable.u)     Gauss upwind;
     div(buoyant.volFlux,buoyant.u)     Gauss upwind;
