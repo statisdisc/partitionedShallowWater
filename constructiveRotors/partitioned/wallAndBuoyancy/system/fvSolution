@@ -14,6 +14,21 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+//Numerical solution
+useOperatorSplitting  false;
+semiImplicit  true;
+offCentre  0.5;
+offCentreOpSplit  0.5;
+
+//Physical solution
+useCoriolis  false;
+useDrag  false;
+useDiffusion  false;
+useMassTransfer  true;
+useBuoyancy  true;
+useGravity  false;
+
+
 solvers
 {
     "h|p"
@@ -49,6 +64,7 @@ solvers
 "iterations|PISO|PIMPLE"
 {
     nCorrectors     1;
+    nUCorrectors    1;
     pRefCell        0;
     pRefValue       0;
 }
