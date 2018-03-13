@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 #Remove previous simulations.
-rm -rf 0 [0-9]*[0-9] constant/polyMesh core log legends gmt.history
+rm -rf 0 [0-9]* [0-9]*[0-9] constant/polyMesh core log legends gmt.history
 
 #Create mesh.
 blockMesh
@@ -25,11 +25,14 @@ cp init_0/h 0/
 partitionedShallowWaterFoamFluxExp
 
 # Plots of results
-#for ((itime=0;itime<21;itime=itime+2))
-#{
-#export time=$(bc <<<"scale=1; $itime/10" )
-#writeCellDataxyz -time $time buoyant.sigma
-#writeCellDataxyz -time $time h
-#writeCellDataxyz -time $time buoyant.Uf
-#writeCellDataxyz -time $time stable.Uf
-#}
+for ((itime=0;itime<101;itime=itime+1))
+{
+export time=$(bc <<<"scale=2; $itime/100" )
+writeCellDataxyz -time $time buoyant.sigma
+writeCellDataxyz -time $time stable.sigma
+writeCellDataxyz -time $time h
+writeCellDataxyz -time $time buoyant.Uf
+writeCellDataxyz -time $time stable.Uf
+writeCellDataxyz -time $time stable.flux
+writeCellDataxyz -time $time buoyant.flux
+}

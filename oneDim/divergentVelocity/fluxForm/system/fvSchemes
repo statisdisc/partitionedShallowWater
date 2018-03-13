@@ -30,14 +30,24 @@ ddtSchemes
 gradSchemes
 {
     default         none;
+    grad(magSqr(stable.u))     Gauss linear;
+    grad(magSqr(buoyant.u))    Gauss linear;
+    linearUpwind               Gauss linear;
+    grad(stable.h_0)           Gauss linear;
+    grad(buoyant.h_0)          Gauss linear;
+    grad(magSqr(stable.u_0))   Gauss linear;
+    grad(magSqr(buoyant.u_0))  Gauss linear;
 }
 
 divSchemes
 {
     default         none;
     //Needed for governing equations.
-    div(stable.volFlux,stable.h)     Gauss upwind;
-    div(buoyant.volFlux,buoyant.h)   Gauss upwind;
+    div(stable.volFlux,stable.h_0)     Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.h_0)   Gauss vanLeer;
+    
+    div(stable.flux,stable.u_0)        Gauss vanLeer;//Gauss APVM stable.Uf;//
+    div(buoyant.flux,buoyant.u_0)      Gauss vanLeer;//Gauss APVM buoyant.Uf;//
 }
 
 laplacianSchemes
@@ -56,6 +66,12 @@ interpolationSchemes
     interpolate(buoyant.u)        linear;
     flux(div((stable.flux*stable.Uf)))        upwind stable.flux;
     flux(div((buoyant.flux*buoyant.Uf)))      upwind buoyant.flux;
+    interpolate(convection(stable.flux,stable.u_0))       linear;
+    interpolate(convection(buoyant.flux,buoyant.u_0))     linear;
+    interpolate(volIntegrate((snGrad(stable.u_0)*magSf)))   linear;
+    interpolate(volIntegrate((snGrad(buoyant.u_0)*magSf)))  linear;
+    interpolate(volIntegrate((snGrad(div((stable.flux*stable.Uf)))*magSf)))     linear;
+    interpolate(volIntegrate((snGrad(div((buoyant.flux*buoyant.Uf)))*magSf)))   linear;
 }
 
 snGradSchemes
