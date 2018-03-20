@@ -16,8 +16,8 @@ FoamFile
 
 //Numerical solution
 useOperatorSplitting  false;
-semiImplicit  true;
-offCentre  0.5;
+semiImplicit  false;
+offCentre  1.;
 offCentreOpSplit  0.5;
 
 //Physical solution

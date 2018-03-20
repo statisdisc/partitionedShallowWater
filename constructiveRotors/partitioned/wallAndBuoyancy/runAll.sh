@@ -45,9 +45,16 @@ cp init_0/stable.sink 0/
 setFields -dict system/stableSinkDict
 cp init_0/buoyant.sink 0/
 setFields -dict system/buoyantSinkDict
+
+#Set permanent momentum source regions.
 cp init_0/stable.momentumSource 0/
 cp init_0/buoyant.momentumSource 0/
 setFields -dict system/buoyantMomentumSourceDict
+
+#Set permanent momentum decay regions.
+cp init_0/stable.momentumSink 0/
+cp init_0/buoyant.momentumSink 0/
+setFields -dict system/buoyantMomentumSinkDict
 
 cp init_0/gravity 0/
 
