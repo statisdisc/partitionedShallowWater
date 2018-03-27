@@ -37,6 +37,8 @@ gradSchemes
     grad(buoyant.h_0)          Gauss linear;
     grad(magSqr(stable.u_0))   Gauss linear;
     grad(magSqr(buoyant.u_0))  Gauss linear;
+    stable                     Gauss upwind stable.volFlux;//Gauss linear;
+    buoyant                    Gauss upwind buoyant.volFlux;//Gauss linear;
     grad(h)                    Gauss linear;
     grad(magSqr(stable.hu_0))    Gauss linear;
     grad(magSqr(buoyant.hu_0))   Gauss linear;
@@ -51,10 +53,10 @@ divSchemes
     div(stable.volFlux_0,stable.h_0)     Gauss upwind;
     div(buoyant.volFlux_0,buoyant.h_0)   Gauss upwind;
     
-    div(stable.volFlux,stable.hu)        Gauss APVM stable.Uf;//Gauss upwind;
-    div(buoyant.volFlux,buoyant.hu)      Gauss APVM buoyant.Uf;//Gauss upwind;
-    div(stable.volFlux_0,stable.hu_0)    Gauss APVM stable.Uf;//Gauss upwind;
-    div(buoyant.volFlux_0,buoyant.hu_0)  Gauss APVM buoyant.Uf;//Gauss upwind;
+    div(stable.volFlux,stable.hu)        Gauss upwind;//Gauss APVM stable.Uf;//Gauss upwind;
+    div(buoyant.volFlux,buoyant.hu)      Gauss upwind;//Gauss APVM buoyant.Uf;//Gauss upwind;
+    div(stable.volFlux_0,stable.hu_0)    Gauss upwind;//Gauss APVM stable.Uf;//Gauss upwind;
+    div(buoyant.volFlux_0,buoyant.hu_0)  Gauss upwind;//Gauss APVM buoyant.Uf;//Gauss upwind;
 }
 
 laplacianSchemes
