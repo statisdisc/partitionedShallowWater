@@ -16,7 +16,7 @@ cp init_0/buoyant.Uf 0/buoyant.Uf
 #Create initial partition fraction distributions.
 cp init_0/buoyant.sigma 0/
 cp init_0/stable.sigma 0/
-sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
+#sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 cp init_0/h 0/
 
@@ -25,7 +25,7 @@ cp init_0/h 0/
 partitionedShallowWaterFoamFluxExp
 
 # Plots of results
-for ((itime=0;itime<101;itime=itime+1))
+for ((itime=0;itime<505;itime=itime+5))
 {
 export time=$(bc <<<"scale=2; $itime/100" )
 writeCellDataxyz -time $time buoyant.sigma

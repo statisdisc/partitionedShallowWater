@@ -23,7 +23,7 @@ offCentreOpSplit  0.5;
 //Physical solution
 useCoriolis  false;
 useDrag  false;
-useDiffusion  true;
+useDiffusion  false;
 useMassTransfer  true;
 useBuoyancy  true;
 useGravity  false;
