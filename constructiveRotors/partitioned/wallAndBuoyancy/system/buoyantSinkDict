@@ -16,7 +16,7 @@ FoamFile
 
 defaultFieldValues
 (
-    volScalarFieldValue buoyant.sink 1
+    volScalarFieldValue buoyant.sink 0.01
 );
 
 regions
@@ -26,7 +26,7 @@ regions
     //sphereToCell
     boxToCell
     {
-        box (-2.5e3 0 0) (2.5e3 1e4 1000);
+        box (-4e3 0 0) (4e3 1e3 1000);
 
         fieldValues
         (
