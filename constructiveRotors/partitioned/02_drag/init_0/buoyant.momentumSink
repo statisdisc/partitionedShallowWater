@@ -1,9 +1,8 @@
-/*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  dev                                   |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
+/*--------------------------------*- C++ -*----------------------------------*| =========                 |                                                 |
+| \      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \    /   O peration     | Version:  dev                                   |
+|   \  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -11,13 +10,13 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      stable.sigma;
+    object      buoyant.momentumSink;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 0 -1 0 0 0 0];
 
-internalField   uniform 0.999;
+internalField   uniform 0;
 
 boundaryField
 {
@@ -39,12 +38,13 @@ boundaryField
     }
     front
     {
-        type empty;
+        type            empty;
     }
     back
     {
-        type empty;
+        type            empty;
     }
 }
+
 
 // ************************************************************************* //

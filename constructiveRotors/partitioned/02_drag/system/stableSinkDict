@@ -9,42 +9,31 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    location    "0";
-    object      stable.sigma;
+    class       dictionary;
+    object      setFieldsDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+defaultFieldValues
+(
+    volScalarFieldValue stable.sink 0
+);
 
-internalField   uniform 0.999;
+regions
+(
+    // Set cell values
+    // (does zerogradient on boundaries)
+    //sphereToCell
+    boxToCell
+    {
+        box (-4e3 0 0) (4e3 1e3 1000);
 
-boundaryField
-{
-    equator
-    {
-        type            zeroGradient;
+        fieldValues
+        (
+            volScalarFieldValue stable.sink 1
+        );
     }
-    pole
-    {
-        type            zeroGradient;
-    }
-    inlet
-    {
-        type            cyclic;
-    }
-    outlet
-    {
-        type            cyclic;
-    }
-    front
-    {
-        type empty;
-    }
-    back
-    {
-        type empty;
-    }
-}
+
+);
 
 // ************************************************************************* //

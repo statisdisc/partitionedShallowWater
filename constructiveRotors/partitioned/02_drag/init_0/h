@@ -10,14 +10,14 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
-    object      stable.sigma;
+    location    "constant";
+    object      h;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 1 0 0 0 0 0];
 
-internalField   uniform 0.999;
+internalField   uniform 1e3;
 
 boundaryField
 {
@@ -46,5 +46,6 @@ boundaryField
         type empty;
     }
 }
+
 
 // ************************************************************************* //

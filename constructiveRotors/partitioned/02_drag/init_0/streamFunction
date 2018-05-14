@@ -10,24 +10,26 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
-    object      stable.sigma;
+    location    "constant";
+    object      streamFunction;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 2 -1 0 0 0 0];
 
-internalField   uniform 0.999;
+internalField   uniform 0;
 
 boundaryField
 {
     equator
     {
-        type            zeroGradient;
+        type            cyclic;
+        value           uniform 0;
     }
     pole
     {
-        type            zeroGradient;
+        type            cyclic;
+        //gradient        uniform 10;
     }
     inlet
     {
@@ -38,13 +40,14 @@ boundaryField
         type            cyclic;
     }
     front
-    {
-        type empty;
-    }
+        {
+            type empty;
+        }
     back
-    {
-        type empty;
-    }
+        {
+            type empty;
+        }
 }
+
 
 // ************************************************************************* //

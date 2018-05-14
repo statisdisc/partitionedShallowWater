@@ -9,42 +9,49 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
+    class       surfaceScalarField;
     location    "0";
-    object      stable.sigma;
+    object      phi;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 3 -1 0 0 0 0];
 
-internalField   uniform 0.999;
+internalField   uniform 0;
 
 boundaryField
 {
     equator
     {
-        type            zeroGradient;
+        //type            zeroGradient;
+        type            fixedValue;
+        value           uniform 0;
     }
     pole
     {
-        type            zeroGradient;
+        //type            zeroGradient;
+        type            fixedValue;
+        value           uniform 0;
     }
     inlet
     {
         type            cyclic;
+        value           uniform 0;
     }
     outlet
     {
         type            cyclic;
+        value           uniform 0;
     }
     front
     {
-        type empty;
+        type            empty;
     }
     back
     {
-        type empty;
+        type            empty;
     }
 }
+
 
 // ************************************************************************* //

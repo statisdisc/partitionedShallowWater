@@ -27,5 +27,5 @@ FieldsToPlot
 
 boundaryMarks "2500/2500";
 plotBoundaryDots false;
-annotate "minMax -4000 9000";
+annotate "minMax 0 -38000";
 

@@ -11,23 +11,23 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      stable.sigma;
+    object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.999;
+internalField   uniform 0;
 
 boundaryField
 {
     equator
     {
-        type            zeroGradient;
+        type            cyclic;
     }
     pole
     {
-        type            zeroGradient;
+        type            cyclic;
     }
     inlet
     {
@@ -46,5 +46,6 @@ boundaryField
         type empty;
     }
 }
+
 
 // ************************************************************************* //
