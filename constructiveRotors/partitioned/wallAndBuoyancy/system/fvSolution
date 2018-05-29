@@ -19,6 +19,8 @@ useOperatorSplitting  true;
 semiImplicit  false;
 offCentre  1.;
 offCentreOpSplit  0.5;
+implicitMassTransfer false;
+implicitMomentumTransfer false;
 
 //Physical solution
 useCoriolis  false;
