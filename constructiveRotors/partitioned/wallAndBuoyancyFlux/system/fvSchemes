@@ -1,0 +1,109 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          fvSchemes;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    curl((streamFunction*(0,0,1))) Gauss linear;
+    linearUpwind Gauss linear;
+    
+    grad(stable.sigmah)        Gauss linear;
+    grad(buoyant.sigmah)       Gauss linear;
+    grad(stable.sigmah_0)      Gauss linear;
+    grad(buoyant.sigmah_0)     Gauss linear;
+    grad(stable.sigma)    Gauss linear;
+    grad(buoyant.sigma)   Gauss linear;
+    grad(tr(grad(stable.Uf)))     Gauss linear;
+    grad(tr(grad(buoyant.Uf)))    Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(U,u)        Gauss linear;
+    div(phi,U)      Gauss linear;
+    //div(stable.volFlux,stable.sigmah)     Gauss upwind; //Gauss vanLeer;
+    //div(buoyant.volFlux,buoyant.sigmah)   Gauss upwind; //Gauss upwind;
+    //div(stable.volFlux_0,stable.sigmah_0)     Gauss upwind;
+    //div(buoyant.volFlux_0,buoyant.sigmah_0)   Gauss upwind;
+    //div(stable.volFlux,stable.hu)    Gauss upwind;
+    //div(buoyant.volFlux,buoyant.hu)    Gauss upwind;
+    //div(stable.volFlux_0,stable.hu_0)    Gauss upwind;
+    //div(buoyant.volFlux_0,buoyant.hu_0)    Gauss upwind;
+    
+    div(stable.volFlux,stable.sigmah)     Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.sigmah)   Gauss vanLeer;
+    div(stable.volFlux_0,stable.sigmah_0)     Gauss vanLeer;
+    div(buoyant.volFlux_0,buoyant.sigmah_0)   Gauss vanLeer;
+    div(stable.volFlux,stable.hu)    Gauss vanLeer;
+    div(buoyant.volFlux,buoyant.hu)    Gauss vanLeer;
+    div(stable.volFlux_0,stable.hu_0)    Gauss vanLeer;
+    div(buoyant.volFlux_0,buoyant.hu_0)    Gauss vanLeer;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear uncorrected;
+    h                         Gauss linear uncorrected;
+    laplacian(streamFunction) Gauss linear uncorrected;
+    laplacian(h)              Gauss linear uncorrected;
+}
+
+interpolationSchemes
+{
+    default            linear;
+    interpolate(U)     linear;
+    flux((twoOmega^U)) linear;
+    flux(convection(phi,U)) linear;
+    
+    interpolate(grad(stable.Uf))  upwind stable.volFlux;//linearUpwind stable.volFlux linearUpwind; //;
+    interpolate(grad(buoyant.Uf)) upwind buoyant.volFlux;//linearUpwind buoyant.volFlux linearUpwind; //;
+    interpolate(stable.u)         linear;
+    interpolate(buoyant.u)        linear;
+    interpolate(h)                linear;
+    
+    interpolate((convection(stable.volFlux,stable.u)-(stable.u*div(stable.volFlux))))   linear;
+    interpolate((convection(buoyant.volFlux,buoyant.u)-(buoyant.u*div(buoyant.volFlux))))   linear;
+}
+
+snGradSchemes
+{
+    default         uncorrected;
+    snGrad(h)       uncorrected;
+    snGrad(p)       uncorrected;
+}
+
+fluxRequired
+{
+    default         no;
+    h;
+}
+
+
+// ************************************************************************* //

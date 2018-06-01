@@ -17,7 +17,7 @@ FoamFile
 //Numerical solution
 useOperatorSplitting  true;
 semiImplicit  false;
-offCentre  1.;
+offCentre  1;
 offCentreOpSplit  0.5;
 implicitMassTransfer false;
 implicitMomentumTransfer false;
@@ -65,7 +65,7 @@ solvers
 
 "iterations|PISO|PIMPLE"
 {
-    nCorrectors     1;
+    nCorrectors     2;
     nUCorrectors    1;
     pRefCell        0;
     pRefValue       0;

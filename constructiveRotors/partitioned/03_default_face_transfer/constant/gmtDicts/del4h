@@ -16,14 +16,17 @@ FoamFile
 // Compulsory inputs
 projection "X18c/18c";
 projection2D XY;
-separateLegend true;
 
 FieldsToPlot
 (
-    [delta_ke filledContours -1e+14 1e+14 1e+13 "$GMTU/colours/red_white_blue.cpt"]
+    [del4h filledContours -5e-21 5e-21 5e-22 "$GMTU/colours/red_white_blue.cpt"]
+    [none mesh "grey"]
 );
 
-boundaryMarks "2500/2500";
+// Options
 plotBoundaryDots false;
-annotate "minMax -4000 9000";
+//separateLegend true;
+//region "-25e3/25e3/0/25e3";
+annotate "minMax 0 -38000";
+//boundaryMarks "5e3/5e3";
 
