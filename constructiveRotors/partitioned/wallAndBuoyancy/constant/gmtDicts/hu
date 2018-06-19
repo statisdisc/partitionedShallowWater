@@ -16,14 +16,16 @@ FoamFile
 // Compulsory inputs
 projection "X18c/18c";
 projection2D XY;
+separateLegend true;
 
 FieldsToPlot
 (
     [h filledContours 8e3 11e3 200 "$GMTU/colours/red_white_blue.cpt"]
-    [stable.Uf vectors 1e4 5 "black"]
-    [buoyant.Uf vectors 1e4 5 "grey"]
+    [Uf.stable vectors 1e4 5 "black"]
+    [Uf.buoyant vectors 1e4 5 "grey"]
 );
 
+boundaryMarks "2500/2500";
 plotBoundaryDots false;
 annotate "minMax 0 -38000";
 

@@ -20,9 +20,9 @@ separateLegend true;
 
 FieldsToPlot
 (
-    [buoyant.sigma filledContours 0 1 0.05 "$GMTU/colours/white_black.cpt"]
-    [buoyant.Uf vectors 20 10 "red"]
-    [stable.Uf vectors 20 10 "black"]
+    [sigma.buoyant filledContours 0 1 0.05 "$GMTU/colours/white_black.cpt"]
+    [Uf.buoyant vectors 20 10 "red"]
+    [Uf.stable vectors 20 10 "black"]
 );
 
 boundaryMarks "2500/2500";

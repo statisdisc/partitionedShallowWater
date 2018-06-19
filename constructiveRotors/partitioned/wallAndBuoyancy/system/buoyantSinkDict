@@ -16,7 +16,7 @@ FoamFile
 
 defaultFieldValues
 (
-    volScalarFieldValue buoyant.sink 0.01
+    volScalarFieldValue sink.buoyant 0.01
 );
 
 regions
@@ -30,7 +30,7 @@ regions
 
         fieldValues
         (
-            volScalarFieldValue buoyant.sink 0
+            volScalarFieldValue sink.buoyant 0
         );
     }
 
