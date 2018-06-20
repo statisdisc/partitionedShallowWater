@@ -65,6 +65,6 @@ gmtPlot plots/plotEnergy.gmt
 # Plot sigma and hu for all times
 for plot in sigmaU; do
     gmtFoam $plot
-    eps2gif $plot.gif 0/$plot.pdf ?????/$plot.pdf ??????/$plot.pdf
+    eps2gif $plot.gif 0/$plot.pdf ??/$plot.pdf ???/$plot.pdf ????/$plot.pdf
 done
 
