@@ -25,6 +25,9 @@ makeHotBubble
 mv 0/theta 0/theta.stable
 cp 0/theta_init 0/theta.buoyant
 
+mv 0/thetaVar 0/thetaVar.stable
+cp 0/thetaVar.stable 0/thetaVar.buoyant
+
 # Partition into stable and buoyant fluids
 #cp 0/buoyant.theta 0/stable.theta
 #mv 0/theta_init 0/buoyant.theta
@@ -43,7 +46,7 @@ gv $time/sigmaTheta.pdf &
 
 # Solve Euler equations
 #partitionedExnerFoam >& log & sleep 0.01; tail -f log
-partitionedExnerFoamAdv >& log & sleep 0.01; tail -f log
+partitionedExnerVarianceFoamAdv >& log & sleep 0.01; tail -f log
 
 # Plot theta and sigma
 for time in 100 1000; do
