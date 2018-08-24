@@ -19,7 +19,7 @@ useOperatorSplitting  true;
 semiImplicit  false;
 offCentre  1.;
 offCentreOpSplit  0.5;
-gravitationalAcceleration 7.5625;
+gravitationalAcceleration 0.0625;
 
 //Physical solution
 useCoriolis  false;

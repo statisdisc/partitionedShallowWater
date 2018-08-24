@@ -40,6 +40,13 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
         for i in xrange(len(stability)):
             print i
             for j in xrange(len(stability[0])):
+                h0 = 0.5
+                h1 = 0.5
+                u0[j] = 0.005 * dx/dt 
+                u1[j] = 0.1 * dx/dt 
+                g[i] = 0.1**2 * dx**2/dt**2 / (h0+h1)
+                
+            
                 dict1_file = open(dict1_filename, "wb")
                 dict1_file.write(dict1 % (h0,h1,u0[j],u1[j], -0.1*h0,-0.1*h1,-0.1*u0[j],-0.1*u1[j]))
                 dict1_file.close()
@@ -49,7 +56,7 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
                 dict2_file.close()
                 
                 os.system( os.path.join(folder, "allRun.sh") )
-                
+                break
                 delta_e_filename = os.path.join(folder, "energy.dat")
                 delta_e_file = open(delta_e_filename, "r+")
                 delta_e = delta_e_file.read()
@@ -64,7 +71,7 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
                     stability[i][j] = 0.
                 else:
                     stability[i][j] = 1.
-        
+            break
     #Adjust axes to center points visually.
     u1 -= (u1[1] - u1[0])/2.
     x = u1 * dt/dx

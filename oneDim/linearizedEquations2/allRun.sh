@@ -45,12 +45,11 @@ gmtPlot plots/plotSigma.gmt
 partitionedLinearizedShallowWaterFoam
 
 # Plots of results
-#for ((itime=0;itime<21;itime=itime+2))
-#{
-#export time=$(bc <<<"scale=1; $itime/10" )
-#writeCellDataxyz -time $time buoyant.sigma
-#writeCellDataxyz -time $time h
-#writeCellDataxyz -time $time buoyant.Uf
-#writeCellDataxyz -time $time stable.Uf
-#writeCellDataxyz -time $time stable.u
-#}
+for ((itime=0;itime<51;itime=itime+1))
+{
+export time=$(bc <<<"scale=1; $itime/10" )
+writeCellDataxyz -time $time sigmah.stable
+writeCellDataxyz -time $time sigmah.buoyant
+writeCellDataxyz -time $time u.stable
+writeCellDataxyz -time $time u.buoyant
+}
