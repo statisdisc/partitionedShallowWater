@@ -20,7 +20,7 @@ defaultFieldValues
     volScalarFieldValue sigma.buoyant 0.5
     volScalarFieldValue h 1
     volVectorFieldValue u.stable (0.0128205128205 0 0)
-    volVectorFieldValue u.buoyant (0.25641025641 0 0)
+    volVectorFieldValue u.buoyant (1.28205128205 0 0)
 );
 
 regions
@@ -37,7 +37,7 @@ regions
             volScalarFieldValue sigma.buoyant 0.5
             volScalarFieldValue h 0.9
             volVectorFieldValue u.stable (0.0115384615385 0 0)
-            volVectorFieldValue u.buoyant (0.230769230769 0 0)
+            volVectorFieldValue u.buoyant (1.15384615385 0 0)
         );
     }
 

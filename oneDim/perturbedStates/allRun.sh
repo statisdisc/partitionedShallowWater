@@ -34,12 +34,13 @@ gmtPlot plots/plotSigma.gmt
 partitionedShallowWaterFoamAdvExp
 
 # Plots of results
-for ((itime=0;itime<51;itime=itime+1))
+for ((itime=0;itime<501;itime=itime+1))
 {
-export time=$(bc <<<"scale=1; $itime/10" )
+export time=$(bc <<<"scale=10; $itime/100" )
 writeCellDataxyz -time $time sigmah.stable
 writeCellDataxyz -time $time sigmah.buoyant
 writeCellDataxyz -time $time u.stable
 writeCellDataxyz -time $time u.buoyant
+writeCellDataxyz -time $time energy
 }
 find [-0-9]*/ ! -name '*.xyz' -type f -exec rm -f {} +

@@ -43,7 +43,7 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
                 h0 = 0.5
                 h1 = 0.5
                 u0[j] = 0.005 * dx/dt 
-                u1[j] = 0.1 * dx/dt 
+                u1[j] = 0.5 * dx/dt 
                 g[i] = 0.1**2 * dx**2/dt**2 / (h0+h1)
             
                 dict1_file = open(dict1_filename, "wb")
