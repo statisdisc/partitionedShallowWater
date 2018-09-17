@@ -14,33 +14,16 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-defaultFieldValues
-(
-    volScalarFieldValue sigma.buoyant 0.
-);
-
 regions
 (
     // Set cell values
-    // (does zerogradient on boundaries)
-    sphereToCell
-    {
-        centre (0 500 2e3);
-        radius 2000;
-
-        fieldValues
-        (
-            volScalarFieldValue sigma.buoyant 0.
-        );
-    }
-    
     boxToCell
     {
         box (-2.5e3 -2.5e3 0) (2.5e3 2.5e3 1e2);
 
         fieldValues
         (
-            volScalarFieldValue theta.stable 325
+            volScalarFieldValue theta.stable 302
         );
     }
 );
