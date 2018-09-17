@@ -19,7 +19,7 @@ projection2D XZ;
 
 FieldsToPlot
 (
-    [theta filledContours 300 302 0.2 "$GMTU/colours/white_blue_red.cpt"]
+    [theta.stable filledContours 300 302 0.2 "$GMTU/colours/white_blue_red.cpt"]
     [Uf    vectors 50 17 "black"]
 );
 

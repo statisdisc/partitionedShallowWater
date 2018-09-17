@@ -16,7 +16,7 @@ FoamFile
 
 defaultFieldValues
 (
-    volScalarFieldValue buoyant.sigma 0.001
+    volScalarFieldValue sigma.buoyant 0.
 );
 
 regions
@@ -30,10 +30,19 @@ regions
 
         fieldValues
         (
-            volScalarFieldValue buoyant.sigma 0.999
+            volScalarFieldValue sigma.buoyant 0.
         );
     }
+    
+    boxToCell
+    {
+        box (-2.5e3 -2.5e3 0) (2.5e3 2.5e3 1e2);
 
+        fieldValues
+        (
+            volScalarFieldValue theta.stable 325
+        );
+    }
 );
 
 // ************************************************************************* //
