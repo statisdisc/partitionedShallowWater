@@ -22,8 +22,8 @@ cp 0/theta 0/theta_init
 #mv 0/theta 0/stable.theta
 #cp constant/initialProperties1 constant/initialProperties
 #makeHotBubble
-mv 0/theta 0/theta.stable
-cp 0/theta_init 0/theta.buoyant
+cp init_0/theta.stable 0/theta.stable
+cp init_0/theta.buoyant 0/theta.buoyant
 
 mv 0/thetaVar 0/thetaVar.stable
 cp 0/thetaVar.stable 0/thetaVar.buoyant

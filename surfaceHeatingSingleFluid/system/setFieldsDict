@@ -40,7 +40,7 @@ regions
 
         fieldValues
         (
-            volScalarFieldValue theta.stable 325
+            volScalarFieldValue theta.stable 300
         );
     }
 );
