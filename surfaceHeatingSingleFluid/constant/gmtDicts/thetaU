@@ -24,7 +24,7 @@ FieldsToPlot
 );
 
 separateLegend true;
-region "-0/3000/0/3000";
-annotate "minMax 250 400";
+region "-5000/5000/0/10000";
+annotate "minMax 250 350";
 boundaryMarks "500/500";
 plotBoundaryDots false;
