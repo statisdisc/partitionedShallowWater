@@ -23,7 +23,8 @@ regions
 
         fieldValues
         (
-            volScalarFieldValue thetaSource.stable 0.1
+            volScalarFieldValue thetaSource.stable 1
+            volScalarFieldValue thetaSource.buoyant 1
         );
     }
 );
