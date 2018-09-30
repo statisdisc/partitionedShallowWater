@@ -35,7 +35,7 @@ thetaTransfer false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;
 
 heatSource                                              true;
-heatSourceMax       heatSourceMax       [0 0 -1 1 0]    0.5;
+heatSourceMax       heatSourceMax       [0 0 -1 1 0]    5e6;
 heatSourceCentre    heatSourceCentre    [0 1 0 0 0]     (0 5e2 0);
 heatSourceHeight    heatSourceHeight    [0 1 0 0 0]     (0 0 1e4);
 heatSourceRadius    heatSourceRadius    [0 1 0 0 0]     2.5e3;
