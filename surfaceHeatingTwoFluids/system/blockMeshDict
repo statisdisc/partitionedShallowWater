@@ -17,29 +17,62 @@ FoamFile
     local           "";
 
     class           dictionary;
-    object          environmentalProperties;
+    object          blockMeshDict;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 1;
-cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 1;
-dragCoeff       0;
-Ksigma Ksigma [0 2 -1 0 0] 0;//200;
-minSigma  1e-9;
-// Transfer between partitions based on horizontal divergence
-wTransfer false;
-divTransfer false;
-// Transfer between partitions based on laplacian(theta)
-thetaTransfer false;
-thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;
+convertToMeters 1000;
 
-heatSource                                              true;
-heatSourceMax       heatSourceMax       [0 0 -1 1 0]    0.5;
-heatSourceCentre    heatSourceCentre    [0 1 0 0 0]     (0 5e2 0);
-heatSourceHeight    heatSourceHeight    [0 1 0 0 0]     (0 0 1e4);
-heatSourceRadius    heatSourceRadius    [0 1 0 0 0]     2.5e3;
-heatSourceDirection heatSourceDirection [0 0 0 0 0]     (1 0 0);
-heatSourceDuration  heatSourceDuration  [0 0 1 0 0]     100;
+vertices
+(
+    (-10 1  0)
+    ( 10 1  0)
+    ( 10 1 10)
+    (-10 1 10)
+    (-10 0  0)
+    ( 10 0  0)
+    ( 10 0 10)
+    (-10 0 10)
+);
+
+blocks
+(
+//    hex (0 1 2 3 4 5 6 7) (50 25 1) simpleGrading (1 1 1)
+    hex (0 1 2 3 4 5 6 7) (3 100 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+patches
+(
+    wall ground
+    (
+        (1 5 4 0)
+    )
+    wall top
+    (
+        (3 7 6 2)
+    )
+    wall left
+    (
+        (0 4 7 3)
+    )
+	wall right
+    (
+        (2 6 5 1)
+    )
+	// empty frontAndBack
+    // (
+    //     (0 3 2 1)
+    //     (4 5 6 7)
+    // )
+);
+
+mergePatchPairs
+(
+);
 
 // ************************************************************************* //
