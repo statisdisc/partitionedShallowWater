@@ -1,0 +1,89 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          fvSchemes;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         linear;
+    curl((streamFunction*(0,0,1))) Gauss linear;
+    linearUpwind Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(U,u)        Gauss linear;
+    div(phi,U)      Gauss linear;
+    div(volFlux.stable,sigmah.stable)     Gauss upwind; //Gauss vanLeer;
+    div(volFlux.buoyant,sigmah.buoyant)   Gauss upwind; //Gauss upwind;
+    
+    div(volFlux.stable_0,sigmah.stable_0)     Gauss upwind;
+    div(volFlux.buoyant_0,sigmah.buoyant_0)   Gauss upwind;
+    
+    div(volFlux.stable,u.stable)     Gauss upwind;
+    div(volFlux.buoyant,u.buoyant)     Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear uncorrected;
+    h                         Gauss linear uncorrected;
+    laplacian(streamFunction) Gauss linear uncorrected;
+    laplacian(h)              Gauss linear uncorrected;
+}
+
+interpolationSchemes
+{
+    default            linear;
+    interpolate(U)     linear;
+    flux((twoOmega^U)) linear;
+    flux(convection(phi,U)) linear;
+    
+    interpolate(grad(Uf.stable))  upwind volFlux.stable;//linearUpwind stable.volFlux linearUpwind; //;
+    interpolate(grad(Uf.buoyant)) upwind volFlux.buoyant;//linearUpwind buoyant.volFlux linearUpwind; //;
+    interpolate(u.stable)         linear;
+    interpolate(u.buoyant)        linear;
+    interpolate(h)                linear;
+    
+}
+
+snGradSchemes
+{
+    default         uncorrected;
+    snGrad(h)       uncorrected;
+    snGrad(p)       uncorrected;
+}
+
+fluxRequired
+{
+    default         no;
+    h;
+}
+
+
+// ************************************************************************* //
