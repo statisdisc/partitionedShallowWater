@@ -35,9 +35,9 @@ thetaTransfer true;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 1e6;
 
 massTransferImplicit        0;
-thetaTransferImplicit       0;
-velocityTransferImplicit    0;
+thetaTransferImplicit       1;
+velocityTransferImplicit    1;
 transferNumeratorOld        true;
-transferDenominatorOld      false;
+transferDenominatorOld      true;
 
 // ************************************************************************* //
