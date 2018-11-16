@@ -19,14 +19,10 @@ projection2D XZ;
 
 FieldsToPlot
 (
-    [thetaDiff filledContours -0.335 0.335 0.01 "$GMTU/colours/red_white_blue.cpt"]
-//    [thetaDiff   solidContours 0 0.02 0.002]
-//    [thetaDiff   dashedContours -0.02 0 0.002]
-//    [Uf vectors  500 17 "black"]
-//    [Uf.diff vectors 5e4 13 "white"]
+    [rhoDiff filledContours -5e-3 5e-3 5e-4 "$GMTU/colours/red_white_blue.cpt"]
 );
 
-separateLegend true;
+//separateLegend true;
 region "-5000/5000/0/1e4";
 annotate "minMax -1.2e3 400";
 boundaryMarks "2500/2500";
