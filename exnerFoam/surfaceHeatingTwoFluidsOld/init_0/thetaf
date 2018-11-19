@@ -9,33 +9,40 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    location    "0";
-    object      buoyant.sigma;
+    class       surfaceScalarField;
+    location    "constant";
+    object      thetaStat;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 0 0 1 0 0 0];
 
-internalField   uniform 0.5;
+// all values are placeholders that are overwritten by setTheta
+// _init files are used to establish the type of boundary conditions
+
+internalField   uniform 300;
 
 boundaryField
 {
     ground
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform 300;
     }
     top
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform 300;
     }
     left
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform 300;
     }
     right
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform 300;
     }
 }
 

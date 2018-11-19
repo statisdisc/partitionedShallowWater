@@ -10,32 +10,39 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
-    object      buoyant.sigma;
+    location    "constant";
+    object      Exner;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0.5;
+internalField   uniform 1;
 
 boundaryField
 {
     ground
     {
-        type            zeroGradient;
+        type            partitionedHydrostaticExner;
+        gradient        uniform 0;
+        value           uniform 1;
     }
     top
     {
-        type            zeroGradient;
+        type            partitionedHydrostaticExner;
+        value           uniform 0.346341;
     }
     left
     {
-        type            zeroGradient;
+        type            partitionedHydrostaticExner;
+        gradient        uniform 0;
+        value           uniform 1;
     }
     right
     {
-        type            zeroGradient;
+        type            partitionedHydrostaticExner;
+        gradient        uniform 0;
+        value           uniform 1;
     }
 }
 
