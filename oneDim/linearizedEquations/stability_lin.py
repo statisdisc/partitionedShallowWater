@@ -40,11 +40,11 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
         for i in xrange(len(stability)):
             print i
             for j in xrange(len(stability[0])):
-                h0 = 0.5
-                h1 = 0.5
-                u0[j] = 0.005 * dx/dt 
-                u1[j] = 0.5 * dx/dt 
-                g[i] = 0.1**2 * dx**2/dt**2 / (h0+h1)
+                #h0 = 0.5
+                #h1 = 0.5
+                #u0[j] = 0.005 * dx/dt 
+                #u1[j] = 0.5 * dx/dt 
+                #g[i] = 0.1**2 * dx**2/dt**2 / (h0+h1)
                 
             
                 dict1_file = open(dict1_filename, "wb")
@@ -56,7 +56,6 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
                 dict2_file.close()
                 
                 os.system( os.path.join(folder, "allRun.sh") )
-                break
                 delta_e_filename = os.path.join(folder, "energy.dat")
                 delta_e_file = open(delta_e_filename, "r+")
                 delta_e = delta_e_file.read()
@@ -71,7 +70,8 @@ def stability_space(h0,h1,c0,Cd,dt,dx,resolution,filename,folder,annotations=Fal
                     stability[i][j] = 0.
                 else:
                     stability[i][j] = 1.
-            break
+                #break
+            #break
     #Adjust axes to center points visually.
     u1 -= (u1[1] - u1[0])/2.
     x = u1 * dt/dx
@@ -208,11 +208,22 @@ def main():
                 # stability_space(h,1.-h,c,d,dt,dx,resolution,filename,folder,annotations=False,color=True)
     
     #Single run.
-    h = 0.             #h0
-    c = 0.005             #c0
+    h = 0.5             #h0
+    c = 0.505             #c0
     d = 0.              #Cd
     filename = "c0_{}_h0_{}".format(c,h)
     filename = filename.replace(".0","").replace("1.","1").replace("0.","0").replace("c0_-10_","")
     stability_space(h,1.-h,c,d,dt,dx,resolution,filename,folder,annotations=False,color=True)
+    
+    testcases = [[0.,0.005],[0.5,-10.],[0.5,0.005],[0.5,0.505],[0.001,0.005],[0.001,0.505],[0.999,0.005],[0.999,0.505]]
+    # testcases = [[0.5,-10.],[0.5,0.005],[0.5,0.505],[0.001,0.005],[0.001,0.505],[0.999,0.005],[0.999,0.505]]
+    
+    for i in xrange(len(testcases)):
+        h = testcases[i][0]
+        c = testcases[i][1]
+        filename = "c0_{}_h0_{}".format(c,h)
+        print filename
+        filename = filename.replace(".0","").replace("1.","1").replace("0.","0").replace("c0_-10_","")
+        #stability_space(h,1.-h,c,d,dt,dx,resolution,filename,folder,annotations=False,color=True)
     
 main()
