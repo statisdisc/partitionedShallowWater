@@ -43,6 +43,6 @@ heatSourceDirection heatSourceDirection [0 0 0 0 0]     (1 0 0);
 heatSourceDuration  heatSourceDuration  [0 0 1 0 0]     100;
 
 thetaVarTransfer true;
-thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]    5;
+thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]    2;
 
 // ************************************************************************* //

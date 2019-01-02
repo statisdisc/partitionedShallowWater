@@ -19,8 +19,8 @@ projection2D XZ;
 
 FieldsToPlot
 (
-    [theta.buoyant filledContours 297.975 302.025 0.05 "$GMTU/colours/red_white_blue.cpt"]
-    [u.buoyant    vectors 50 31 "black"]
+    [thetaVar.stable filledContours 0 0.5 0.01 "$GMTU/colours/white_black.cpt"]
+    [u.stable    vectors 50 31 "black"]
 );
 
 separateLegend true;
