@@ -19,13 +19,13 @@ projection2D XZ;
 
 FieldsToPlot
 (
-//    [thetaDiff filledContours -0.335 0.335 0.01 "$GMTU/colours/red_white_blue.cpt"]
-//    [thetaDiff   solidContours 0 0.02 0.002]
-//    [thetaDiff   dashedContours -0.02 0 0.002]
-     [thetaDiff filledContours -0.2 0.2 0.1 "$GMTU/colours/grey_white_grey.cpt"]
-     [thetaDiff   contours 1e-6 0.25 0.05 "black"]
-     [thetaDiff   contours 0 1000 1000 "black,1_5:0"]
-     [thetaDiff   contours -0.25 -1e-6 0.05 "black,5_5:0"]
+    [thetaDiff filledContours -0.335 0.335 0.0067 "$GMTU/colours/red_white_blue.cpt"]
+//     [thetaDiff filledContours -0.2 0.2 0.1 "$GMTU/colours/grey_white_grey.cpt"]
+//     [thetaDiff   contours 1e-6 0.25 0.05 "black"]
+//     [thetaDiff   contours 0 1000 1000 "black,1_5:0"]
+//     [thetaDiff   contours -0.25 -1e-6 0.05 "black,5_5:0"]
+////    [Uf vectors  500 17 "black"]
+////    [Uf.diff vectors 5e4 13 "white"]
 );
 
 separateLegend true;

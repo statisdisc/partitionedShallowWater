@@ -19,8 +19,9 @@ projection2D XZ;
 
 FieldsToPlot
 (
-    [theta.buoyant rawValues 297.975 302.025 0.05 "$GMTU/colours/red_white_blue.cpt"]
-    //[u.buoyant    vectors 30 31 "black"]
+    [theta.buoyant filledContours 297.975 302.025 0.05 "$GMTU/colours/red_white_blue.cpt"]
+    //[theta.buoyant rawValues 297.975 302.025 0.05 "$GMTU/colours/red_white_blue.cpt"]
+    [u.buoyant    vectors 30 31 "black"]
 );
 
 separateLegend true;
