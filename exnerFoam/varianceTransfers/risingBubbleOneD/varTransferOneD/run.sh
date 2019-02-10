@@ -36,7 +36,7 @@ cp 0/Uf.stable 0/Uf.buoyant
 rm 0/thetaf
 
 # create initial conditions
-setFields
+#setFields
 #sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 # Plot initial conditions
@@ -47,6 +47,10 @@ gmtFoam sigmaTheta -time $time
 # Solve Euler equations
 #partitionedExnerFoam >& log & sleep 0.01; tail -f log
 partitionedExnerVarianceFoamAdv >& log & sleep 0.01; tail -f log
+
+gmtFoam thetaUbuoyant
+gmtFoam thetaUstable
+gmtFoam sigma
 
 # Plot theta and sigma
 for time in 100 1000; do

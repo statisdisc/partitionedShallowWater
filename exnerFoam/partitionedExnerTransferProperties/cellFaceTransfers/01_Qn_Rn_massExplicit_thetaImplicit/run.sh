@@ -33,7 +33,7 @@ cp 0/Uf.stable 0/Uf.buoyant
 rm 0/thetaf
 
 # create initial conditions
-#setFields
+setFields
 #sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 # Plot initial conditions
