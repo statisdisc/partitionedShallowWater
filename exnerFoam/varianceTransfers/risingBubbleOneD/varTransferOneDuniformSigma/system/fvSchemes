@@ -61,6 +61,10 @@ interpolationSchemes
     sigmaRho        linear;
     theta           linear;
     massTransfer    linear;
+    interpolate(theta.stable)           linear;
+    interpolate(theta.buoyant)          linear;
+    interpolate(rho.sigma.stable)       linear;
+    interpolate(rho.sigma.buoyant)      linear;
 }
 
 snGradSchemes

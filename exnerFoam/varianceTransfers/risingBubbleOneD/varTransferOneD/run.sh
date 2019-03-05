@@ -33,6 +33,10 @@ cp init_0/thetaVar.buoyant 0/thetaVar.buoyant
 #mv 0/theta_init 0/buoyant.theta
 mv 0/Uf 0/Uf.stable
 cp 0/Uf.stable 0/Uf.buoyant
+
+mv 0/u 0/u.stable
+cp 0/u.stable 0/u.buoyant
+
 rm 0/thetaf
 
 # create initial conditions
@@ -46,7 +50,7 @@ gmtFoam sigmaTheta -time $time
 
 # Solve Euler equations
 #partitionedExnerFoam >& log & sleep 0.01; tail -f log
-partitionedExnerVarianceFoamAdv >& log & sleep 0.01; tail -f log
+multiFluidFoam >& log & sleep 0.01; tail -f log
 
 gmtFoam thetaUbuoyant
 gmtFoam thetaUstable
