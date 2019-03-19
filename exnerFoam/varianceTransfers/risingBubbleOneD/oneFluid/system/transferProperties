@@ -44,5 +44,8 @@ heatSourceDuration  heatSourceDuration  [0 0 1 0 0]     100;
 
 thetaVarTransfer false;
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]    20;
+localThetaVarTransfer                                   false;
+thetaVarTransferWcoupling                               false;
+wCouplingCoeff                                          3e2;
 
 // ************************************************************************* //

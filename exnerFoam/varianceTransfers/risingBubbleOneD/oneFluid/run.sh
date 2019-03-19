@@ -49,6 +49,13 @@ multiFluidFoam
 #multiFluidFoam >& log & sleep 0.01; tail -f log
 
 writeCellDataxyz -time 1000 theta
+writeCellDataxyz -time 1000 theta.stable
+writeCellDataxyz -time 1000 theta.buoyant
+writeCellDataxyz -time 1000 thetaVar.stable
+writeCellDataxyz -time 1000 thetaVar.buoyant
+writeCellDataxyz -time 1000 u.stable
+writeCellDataxyz -time 1000 u.buoyant
+writeCellDataxyz -time 1000 sigma.stable
 writeCellDataxyz -time 1000 sigma.buoyant
 
 

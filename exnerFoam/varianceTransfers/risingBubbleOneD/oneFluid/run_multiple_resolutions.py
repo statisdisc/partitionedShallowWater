@@ -3,8 +3,8 @@ import os
 import numpy as np
 
 folder_xyz = os.path.join(sys.path[0], "xyzData")
-if not os.path.exists( folder_xyz ):
-    os.makedirs( folder_xyz )
+os.system( "rm -rf {}".format(folder_xyz) )
+os.makedirs( folder_xyz )
     
 folder_oneCol = os.path.join(folder_xyz, "oneCol")
 if not os.path.exists( folder_oneCol ):
@@ -17,8 +17,10 @@ if not os.path.exists( folder_threeCols ):
 execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 
 dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
-# dx = np.array([ 10000 ])
+dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
+dx = np.array([ 100 ])
 folders = [folder_oneCol, folder_threeCols]
+folders = [folder_oneCol]
 
 
 
