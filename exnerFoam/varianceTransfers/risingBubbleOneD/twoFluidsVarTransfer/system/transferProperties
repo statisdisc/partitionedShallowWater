@@ -25,7 +25,7 @@ FoamFile
 cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 2000;
 cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 1;
 dragCoeff       0;
-Ksigma Ksigma [0 2 -1 0 0] 20000;//200;
+Ksigma Ksigma [0 2 -1 0 0] 0;//2000;
 minSigma  1e-9;
 // Transfer between partitions based on horizontal divergence
 wTransfer false;
@@ -45,7 +45,11 @@ heatSourceDuration  heatSourceDuration  [0 0 1 0 0]     100;
 thetaVarTransfer                                        true;
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.00001;
 localThetaVarTransfer                                   false;
+wVarTransfer                                            false;
 thetaVarTransferWcoupling                               false;
 wCouplingCoeff                                          3e2;
+
+Kw Kw [0 2 -1 0 0] 2000;
+Ktheta Ktheta [0 2 -1 0 0] 2000;
 
 // ************************************************************************* //
