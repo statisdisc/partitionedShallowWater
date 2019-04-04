@@ -58,6 +58,7 @@ writeCellDataxyz -time 1000 theta.stable
 writeCellDataxyz -time 1000 theta.buoyant
 writeCellDataxyz -time 1000 thetaVar.stable
 writeCellDataxyz -time 1000 thetaVar.buoyant
+writeCellDataxyz -time 1000 u
 writeCellDataxyz -time 1000 u.stable
 writeCellDataxyz -time 1000 u.buoyant
 writeCellDataxyz -time 1000 wVar.stable
