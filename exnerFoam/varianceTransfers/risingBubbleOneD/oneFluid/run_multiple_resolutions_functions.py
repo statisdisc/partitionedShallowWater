@@ -281,7 +281,7 @@ def write_sigmaBuoyant_field(x, z, dx, xcentre, zcentre, radius):
     name = "sigma.buoyant"
     dimensions = "[0 0 0 0 0 0 0]"
     
-    field = bubble2D_sigma(x,z,dx,xcentre,zcentre,radius)
+    field = 0*bubble2D_sigma(x,z,dx,xcentre,zcentre,radius)
     
     write_field(name, dimensions, field)
     
@@ -290,6 +290,7 @@ def write_sigmaStable_field(x, z, dx, xcentre, zcentre, radius):
     dimensions = "[0 0 0 0 0 0 0]"
     
     field = -bubble2D_sigma(x,z,dx,xcentre,zcentre,radius) + 1
+    field = 0*field + 1
     
     write_field(name, dimensions, field)
         
