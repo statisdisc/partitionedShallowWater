@@ -362,15 +362,11 @@ boundaryField
     file.write( foam_string )
     file.close()
     
-    
-def make_field_files(id, folder, z_oneColumn):
-    x,y,z,u,v,w = read_xyz_1d("u.xyz", folder=folder)
-    
+def diagnose_sigma(w, w_transition=0.5):
     sigma_stable = 1.*np.ones(len(w))
     sigma_buoyant = 0.*np.ones(len(w))
     
     #If fluid is rising, label as buoyant fluid
-    w_transition = 0.5
     for k in xrange(len(w)):
         if w[k] > w_transition:
             sigma_buoyant[k] = 1.
@@ -378,13 +374,24 @@ def make_field_files(id, folder, z_oneColumn):
         elif w[k] > -w_transition:
             sigma_buoyant[k] = np.sin( (w[k]+w_transition)/(2*w_transition) * np.pi/2. )**2
             sigma_stable[k] = 1. - sigma_buoyant[k]
+            
+    return sigma_stable,sigma_buoyant
     
+def make_field_files(id, folder, folder_new, z_oneColumn):
+    x,y,z,u,v,w = read_xyz_1d("u.xyz", folder=folder)
+    x,y,z,u,v,w_new = read_xyz_1d("u.xyz", folder=folder_new)
     x,y,z,rho = read_xyz_1d("rho.sigma.stable.xyz", folder=folder)
+    x,y,z,rho_new = read_xyz_1d("rho.sigma.stable.xyz", folder=folder_new)
     x,y,z,theta = read_xyz_1d("theta.xyz", folder=folder)
     x,y,z,exner = read_xyz_1d("Exner.xyz", folder=folder)
     
+    sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.5)
+    sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.5)
+    
     sigmaRho_stable = sigma_stable*rho
     sigmaRho_buoyant = sigma_buoyant*rho
+    sigmaRho_stable_new = sigma_stable_new*rho_new
+    sigmaRho_buoyant_new = sigma_buoyant_new*rho_new
     
     # sigma_stable_binned = bin_data(z, z_oneColumn, sigma_stable)
     sigma_buoyant_binned = bin_data(z, z_oneColumn, sigma_buoyant)
@@ -397,6 +404,11 @@ def make_field_files(id, folder, z_oneColumn):
     # rho_stable_binned = bin_data(z, z_oneColumn, rho)
     rho_buoyant_binned = bin_data_sigma(z, z_oneColumn, rho, sigma_buoyant)
     # rho_buoyant_binned = bin_data(z, z_oneColumn, rho)
+    
+    sigmaRho_stable_binned = bin_data(z, z_oneColumn, sigmaRho_stable)
+    sigmaRho_buoyant_binned = bin_data(z, z_oneColumn, sigmaRho_buoyant)
+    sigmaRho_stable_new_binned = bin_data(z, z_oneColumn, sigmaRho_stable_new)
+    sigmaRho_buoyant_new_binned = bin_data(z, z_oneColumn, sigmaRho_buoyant_new)
     
     theta_binned = bin_data_sigma(z, z_oneColumn, theta, rho)
     theta_stable_binned = bin_data_sigma(z, z_oneColumn, theta, sigmaRho_stable)
@@ -423,6 +435,9 @@ def make_field_files(id, folder, z_oneColumn):
     
     write_field("rho.stable", "[1 -3 0 0 0 0 0]", rho_stable_binned[1:101])
     write_field("rho.buoyant", "[1 -3 0 0 0 0 0]", rho_buoyant_binned[1:101])
+    
+    write_field("sigmaRhoExpected.stable", "[1 -3 0 0 0 0 0]", sigmaRho_stable_new_binned[1:101])
+    write_field("sigmaRhoExpected.buoyant", "[1 -3 0 0 0 0 0]", sigmaRho_buoyant_new_binned[1:101])
     
     write_field("theta", "[0 0 0 1 0 0 0]", theta_binned[1:101])
     write_field("theta.stable", "[0 0 0 1 0 0 0]", theta_stable_binned[1:101])

@@ -26,7 +26,8 @@ dx = np.array([ 10000 ])
 folders = [folder_oneCol, folder_threeCols]
 folders = [folder_oneCol]
 
-z_oneColumn = np.arange(-50.,10050.,100.)
+dt = 1
+z_oneColumn = np.arange(-50.,10150.,100.)
 z_oneColumn[0] = 0.
 z_oneColumn[-1] = 10000.
 
@@ -44,10 +45,11 @@ for i in xrange(len(dx)):
         
         write_blockMeshDict(xmin, xmax, nx)
         
-        for k in xrange(20,420,20):
+        for k in xrange(20,920,20):
             id = str(k)
             folder_k = os.path.join(folder_initial_profiles, id)
-            make_field_files(id, folder_k, z_oneColumn)
+            folder_kp1 = os.path.join(folder_initial_profiles, str(k+dt))
+            make_field_files(id, folder_k, folder_kp1, z_oneColumn)
         
             os.system( "./run.sh" )
             
