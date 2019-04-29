@@ -26,23 +26,26 @@ cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 1000;
 cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 1;
 dragCoeff       0;
 divCoeff        1;
-Ksigma Ksigma [0 2 -1 0 0] 0;//2000;
+Ksigma Ksigma [0 2 -1 0 0] 5e4;//2000;
 minSigma  1e-9;
 // Transfer between partitions based on horizontal divergence
 wTransfer false;
 divTransfer true;
 // Transfer between partitions based on laplacian(theta)
-thetaTransfer false;
-thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;
+thetaTransfer true;
+thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 5e4;
 
 thetaVarTransfer                                        true;
-thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     10;
+thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     2;
 wVarTransfer                                            true;
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     1;
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
 
-Kw Kw [0 2 -1 0 0] 200;
+Kw Kw [0 2 -1 0 0] 1e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
+
+wVarDiffusion                                           true;
+KwVariance          KwVariance          [0 2 -1 0 0]    1e6;
 
 // ************************************************************************* //
