@@ -46,7 +46,7 @@ setFields
 
 # Plot initial conditions
 time=0
-gmtFoam sigmaTheta -time $time
+#gmtFoam sigmaTheta -time $time
 #gv $time/sigmaTheta.pdf &
 
 # Solve Euler equations
