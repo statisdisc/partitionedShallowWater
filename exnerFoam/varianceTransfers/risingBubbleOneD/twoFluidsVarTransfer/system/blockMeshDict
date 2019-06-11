@@ -23,8 +23,8 @@ FoamFile
 
 convertToMeters 1000;
 
-xmax  100;
-xmin -100;
+xmax  5;
+xmin -5;
 nx 1;
 
 vertices

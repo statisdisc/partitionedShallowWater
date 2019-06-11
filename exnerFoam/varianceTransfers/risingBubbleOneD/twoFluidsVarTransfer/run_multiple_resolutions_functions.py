@@ -6,7 +6,63 @@ def bubble2D(x,z,xcentre,zcentre,radius):
     else:
         return 0
 
-def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
+def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean="all"):
+    if len(x) == 1:
+        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
+    else:
+        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
+    resolution_z = 10
+    
+    dz = z[1] - z[0]
+    x = np.linspace(xmin,xmax,resolution_x)
+    
+    sigma_index = max(1, int(sigma * resolution_z * len(x)))
+    
+    mean_temp_stable = np.zeros(len(z))
+    mean_temp_buoyant = np.zeros(len(z))
+    var_temp_stable = np.zeros(len(z))
+    var_temp_buoyant = np.zeros(len(z))
+    
+    for k in xrange(len(z)):
+        
+        temperatures = np.zeros((resolution_z,len(x)))
+        for j in xrange(resolution_z):
+            
+            z_new = z[k] - dz/2. + dz*j*1./resolution_z
+            for i in xrange(len(x)):
+                value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
+                temperatures[j][i] = value
+        
+        temperatures = temperatures.flatten()
+        temperature_indices = np.argsort(temperatures)
+        hottest_temps = temperatures[temperature_indices[-sigma_index:]]
+        coolest_temps = temperatures[temperature_indices[:-sigma_index]]
+        
+        mean_temp_stable[k] = np.mean(coolest_temps)
+        mean_temp_buoyant[k] = np.mean(hottest_temps)
+        var_temp_stable[k] = np.var(coolest_temps)
+        var_temp_buoyant[k] = np.var(hottest_temps)
+            
+    return mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant
+    
+def bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="all"):
+    mean_stable = np.zeros((len(z),len(x)))
+    mean_buoyant = np.zeros((len(z),len(x)))
+    var_stable = np.zeros((len(z),len(x)))
+    var_buoyant = np.zeros((len(z),len(x)))
+    
+    for i in xrange(len(x)):
+        xmin = x[i] - 0.5*dx
+        xmax = x[i] + 0.5*dx
+        mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean=mean)
+        mean_stable[:,i] = mean_temp_stable
+        mean_buoyant[:,i] = mean_temp_buoyant
+        var_stable[:,i] = var_temp_stable
+        var_buoyant[:,i] = var_temp_buoyant
+        
+    return mean_stable,mean_buoyant,var_stable,var_buoyant
+
+def bubble1D_mean_singleFluid(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
     if len(x) == 1:
         resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
     else:
@@ -34,93 +90,15 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
             
     return bubble
     
-def bubble2D_mean(x,z,dx,xcentre,zcentre,radius,mean="all"):
+def bubble2D_mean_singleFluid(x,z,dx,xcentre,zcentre,radius,mean="all"):
     bubble_mean = np.zeros((len(z),len(x)))
     
     for i in xrange(len(x)):
         xmin = x[i] - 0.5*dx
         xmax = x[i] + 0.5*dx
-        bubble_mean[:,i] = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean=mean)
+        bubble_mean[:,i] = bubble1D_mean_singleFluid(x,z,xmin,xmax,xcentre,zcentre,radius,mean=mean)
         
     return bubble_mean
-    
-def bubble1D_var(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
-    bubble_mean = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean=mean)
-    
-    if len(x) == 1:
-        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
-    else:
-        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
-    resolution_z = 10
-    
-    dz = z[1] - z[0]
-    x = np.linspace(xmin,xmax,resolution_x)
-    
-    var = np.zeros(len(z))
-    
-    for k in xrange(len(z)):
-        bubble_var = 0.
-        tally = 0
-        
-        for j in xrange(resolution_z):
-            z_new = z[k] - dz/2. + dz*j*1./resolution_z
-            for i in xrange(len(x)):
-                value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
-                if value != 0. or mean == "all":
-                    tally += 1
-                    bubble_var += (value - bubble_mean[k])**2
-            
-        var[k] += bubble_var * 1./max(tally,1)
-            
-    return var
-    
-def bubble2D_var(x,z,dx,xcentre,zcentre,radius,mean="all"):
-    bubble_var = np.zeros((len(z),len(x)))
-    
-    for i in xrange(len(x)):
-        xmin = x[i] - 0.5*dx
-        xmax = x[i] + 0.5*dx
-        bubble_var[:,i] = bubble1D_var(x,z,xmin,xmax,xcentre,zcentre,radius,mean=mean)
-        
-    return bubble_var
-    
-def bubble1D_sigma(x,z,xmin,xmax,xcentre,zcentre,radius):
-    if len(x) == 1:
-        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
-    else:
-        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
-    resolution_z = 10
-    
-    dz = z[1] - z[0]
-    x = np.linspace(xmin,xmax,resolution_x)
-    
-    bubble = np.zeros(len(z))
-    
-    for k in xrange(len(z)):
-        bubble_sigma = 0.
-        
-        for j in xrange(resolution_z):
-            z_new = z[k] - dz/2. + dz*j*1./resolution_z
-            for i in xrange(len(x)):
-                if bubble2D(x[i],z_new,xcentre,zcentre,radius) != 0:
-                    bubble_sigma += 1.
-            
-        bubble[k] = bubble_sigma * 1./(len(x)*resolution_z)
-        
-        # bubble[k] = max( bubble[k], 0.05)
-            
-    return bubble
-    
-def bubble2D_sigma(x,z,dx,xcentre,zcentre,radius):
-    bubble_var = np.zeros((len(z),len(x)))
-    
-    for i in xrange(len(x)):
-        xmin = x[i] - 0.5*dx
-        xmax = x[i] + 0.5*dx
-        bubble_var[:,i] = bubble1D_sigma(x,z,xmin,xmax,xcentre,zcentre,radius)
-        
-    return bubble_var
-    
 def write_field(name, dimensions, field):
 
     string1 = '''/*--------------------------------*- C++ -*----------------------------------*\
@@ -277,66 +255,41 @@ mergePatchPairs
     file.write(string % (xmax,xmin,nx))
     file.close()
     
-def write_sigmaBuoyant_field(x, z, dx, xcentre, zcentre, radius):
+def write_sigmaBuoyant_field(x, z, dx, xcentre, zcentre, radius, sigma):
     name = "sigma.buoyant"
     dimensions = "[0 0 0 0 0 0 0]"
     
-    field = bubble2D_sigma(x,z,dx,xcentre,zcentre,radius)
+    field = sigma * np.ones((len(z),len(x)))
     
     write_field(name, dimensions, field)
     
-def write_sigmaStable_field(x, z, dx, xcentre, zcentre, radius):
+def write_sigmaStable_field(x, z, dx, xcentre, zcentre, radius, sigma):
     name = "sigma.stable"
     dimensions = "[0 0 0 0 0 0 0]"
     
-    field = -bubble2D_sigma(x,z,dx,xcentre,zcentre,radius) + 1
+    field = (1 - sigma)*np.ones((len(z),len(x)))
     
     write_field(name, dimensions, field)
-        
+
 def write_theta_field(x, z, dx, xcentre, zcentre, radius, base_temp):
     name = "theta"
     dimensions = "[0 0 0 1 0 0 0]"
     
-    field = base_temp + bubble2D_mean(x,z,dx,xcentre,zcentre,radius,mean="all")
+    field = base_temp + bubble2D_mean_singleFluid(x,z,dx,xcentre,zcentre,radius,mean="all")
     
     write_field(name, dimensions, field)
-
-def write_thetaBuoyant_field(x, z, dx, xcentre, zcentre, radius, base_temp):
+    
+def write_theta_fields(x, z, dx, xcentre, zcentre, radius, base_temp, sigma):
     name = "theta.buoyant"
     dimensions = "[0 0 0 1 0 0 0]"
     
-    field = base_temp + bubble2D_mean(x,z,dx,xcentre,zcentre,radius,mean="split")
+    mean_stable,mean_buoyant,var_stable,var_buoyant = bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="split")
+    mean_stable += base_temp
+    mean_buoyant += base_temp
     
-    write_field(name, dimensions, field)
+    field = base_temp + mean_buoyant
     
-def write_thetaStable_field(x, z, dx, xcentre, zcentre, radius, base_temp):
-    name = "theta.stable"
-    dimensions = "[0 0 0 1 0 0 0]"
-    
-    field = base_temp * np.ones((len(z),len(x)))
-    
-    write_field(name, dimensions, field)
-        
-def write_thetaVar_field(x, z, dx, xcentre, zcentre, radius):
-    name = "thetaVar"
-    dimensions = "[0 0 0 2 0 0 0]"
-    
-    field = bubble2D_var(x,z,dx,xcentre,zcentre,radius,mean="all")
-    
-    write_field(name, dimensions, field)
-
-def write_thetaVarBuoyant_field(x, z, dx, xcentre, zcentre, radius):
-    name = "thetaVar.buoyant"
-    dimensions = "[0 0 0 2 0 0 0]"
-    
-    field = bubble2D_var(x,z,dx,xcentre,zcentre,radius,mean="split")
-    
-    write_field(name, dimensions, field)
-    
-def write_thetaVarStable_field(x, z, dx, xcentre, zcentre, radius):
-    name = "thetaVar.stable"
-    dimensions = "[0 0 0 2 0 0 0]"
-    
-    field = np.zeros((len(z),len(x)))
-    
-    write_field(name, dimensions, field)
+    write_field("theta.stable", "[0 0 0 1 0 0 0]", mean_stable)
+    write_field("theta.buoyant", "[0 0 0 1 0 0 0]", mean_buoyant)
+    write_field("thetaVar.stable", "[0 0 0 2 0 0 0]", var_stable)
+    write_field("thetaVar.buoyant", "[0 0 0 2 0 0 0]", var_buoyant)
