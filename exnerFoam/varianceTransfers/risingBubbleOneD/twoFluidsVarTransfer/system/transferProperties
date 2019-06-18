@@ -37,10 +37,10 @@ dragTransfer                                            false;
 thetaTransfer                                           false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 
-directVarianceTransfer                                  true;
+directVarianceTransfer                                  false;
 thetaVarTransfer                                        false;
-thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     100;
-wVarTransfer                                            false;
+thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     10;
+wVarTransfer                                            true;
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
