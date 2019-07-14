@@ -23,9 +23,9 @@ FoamFile
 
 convertToMeters 1000;
 
-xmax  100;
-xmin -100;
-nx 1;
+xmax  200;
+xmin -200;
+nx 2;
 
 vertices
 (

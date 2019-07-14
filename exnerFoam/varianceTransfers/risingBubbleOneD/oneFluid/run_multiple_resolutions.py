@@ -17,10 +17,11 @@ if not os.path.exists( folder_threeCols ):
 execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 
 dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
+dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])[::-1]
 #dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
 #dx = np.array([ 100 ])
 folders = [folder_oneCol, folder_threeCols]
-#folders = [folder_oneCol]
+folders = [folder_oneCol]
 
 
 
@@ -29,10 +30,10 @@ for i in xrange(len(dx)):
         
         #Grid properties
         if folders[j] == folder_oneCol:
-            xmax = max( 5, int(0.5*dx[i]/1000.) )
+            xmax = max( 10, int(10*dx[i]/10000.) )
             xmin = -xmax
         if folders[j] == folder_threeCols:
-            xmax = max( 5, int(1.5*dx[i]/1000.) )
+            xmax = max( 10, int(30*dx[i]/10000.) )
             xmin = -xmax
         nx = int( round( 1000*(xmax-xmin)/dx[i] ) )
         
@@ -76,4 +77,4 @@ for i in xrange(len(dx)):
         folder_1000 = os.path.join(sys.path[0], "1000")
         os.system( "cp {} {}/".format( os.path.join(folder_1000,"*.xyz"), folder_testCase ) )
         
-os.system( "cp -r {}/ ~/Dropbox/PhD/2019/02_February/".format(folder_xyz) )
+os.system( "cp -r {}/ ~/Dropbox/PhD/2019/".format(folder_xyz) )
