@@ -21,9 +21,10 @@ cp 0/theta 0/theta_init
 #makeHotBubble
 #mv 0/theta 0/stable.theta
 #cp constant/initialProperties1 constant/initialProperties
+
 makeHotBubble
-mv 0/theta 0/theta.stable
-cp 0/theta_init 0/theta.buoyant
+cp 0/theta 0/theta.stable
+mv 0/theta 0/theta.buoyant
 
 # Partition into stable and buoyant fluids
 #cp 0/buoyant.theta 0/stable.theta
@@ -33,7 +34,7 @@ cp 0/Uf.stable 0/Uf.buoyant
 rm 0/thetaf
 
 # create initial conditions
-setFields
+#setFields
 #sumFields 0 stable.sigma init_0 stable.sigma 0 buoyant.sigma -scale1 -1
 
 # Plot initial conditions
@@ -43,7 +44,7 @@ gmtFoam sigmaTheta -time $time
 
 # Solve Euler equations
 #partitionedExnerFoam >& log & sleep 0.01; tail -f log
-partitionedExnerFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
+multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
 
 # Plot theta and sigma
 for time in 100 1000; do

@@ -49,7 +49,7 @@ laplacianSchemes
 
 interpolationSchemes
 {
-    default        none;
+    default        linear;
     // For initialisation
     interpolate(theta) linear;
     
