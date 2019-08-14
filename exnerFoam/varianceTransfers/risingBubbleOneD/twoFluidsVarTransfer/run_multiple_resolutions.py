@@ -19,7 +19,8 @@ execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
 dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
 dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
-# dx = np.array([ 10000 ])
+dx = np.array([ 20000, 50000, 100000, 200000 ])
+# dx = np.array([ 20000 ])
 folders = [folder_oneCol, folder_threeCols]
 folders = [folder_oneCol]
 
@@ -30,10 +31,10 @@ for i in xrange(len(dx)):
         
         #Grid properties
         if folders[j] == folder_oneCol:
-            xmax = max( 10, int(10*dx[i]/10000.) )
+            xmax = max( 10, int(10*dx[i]/20000.) )
             xmin = -xmax
         if folders[j] == folder_threeCols:
-            xmax = max( 30, int(30*dx[i]/10000.) )
+            xmax = max( 30, int(30*dx[i]/20000.) )
             xmin = -xmax
         nx = int( round( 1000*(xmax-xmin)/dx[i] ) )
         
