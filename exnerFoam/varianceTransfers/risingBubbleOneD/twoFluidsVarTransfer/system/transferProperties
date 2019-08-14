@@ -40,7 +40,7 @@ thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 directVarianceTransfer                                  false;
 thetaVarTransfer                                        false;
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
-wVarTransfer                                            true;
+wVarTransfer                                            false;
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
@@ -49,8 +49,9 @@ wVarProduction                                          false;
 wVarProductionTimescale  wVarProductionTimescale [0 0 1 0 0]  1;
 wVarProductionSeparation                                1.;
 
-Kw Kw [0 2 -1 0 0] 6e3;//4e3;
+//Kw Kw [0 2 -1 0 0] 6e3;//4e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
+Kw Kw [0 0 1 0 0] 0.02;
 
 wVarDiffusion                                           false;
 KwVariance          KwVariance          [0 2 -1 0 0]    2e6;

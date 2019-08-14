@@ -23,13 +23,14 @@ solvers
         tolerance        0;
         relTol           0;
     };
-    Exner
+    "Exner|Exneri.stable|Exneri.buoyant"
     {
         solver PCG;
         preconditioner DIC;
         tolerance        1e-10;
         relTol           0.001;
     }
+    
 
     ExnerFinal
     {

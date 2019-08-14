@@ -53,18 +53,19 @@ time=0
 #multiFluidFoam >& log & sleep 0.01; tail -f log
 multiFluidFoamVarTransfers
 
-writeCellDataxyz -time 1000 theta
-writeCellDataxyz -time 1000 theta.stable
-writeCellDataxyz -time 1000 theta.buoyant
-writeCellDataxyz -time 1000 thetaVar.stable
-writeCellDataxyz -time 1000 thetaVar.buoyant
-writeCellDataxyz -time 1000 u
-writeCellDataxyz -time 1000 u.stable
-writeCellDataxyz -time 1000 u.buoyant
-writeCellDataxyz -time 1000 wVar.stable
-writeCellDataxyz -time 1000 wVar.buoyant
-writeCellDataxyz -time 1000 sigma.stable
-writeCellDataxyz -time 1000 sigma.buoyant
+writeCellDataxyz theta
+writeCellDataxyz theta.stable
+writeCellDataxyz theta.buoyant
+writeCellDataxyz thetaVar.stable
+writeCellDataxyz thetaVar.buoyant
+writeCellDataxyz u
+writeCellDataxyz u.stable
+writeCellDataxyz u.buoyant
+writeCellDataxyz wVar.stable
+writeCellDataxyz wVar.buoyant
+writeCellDataxyz sigma.stable
+writeCellDataxyz sigma.buoyant
+#writeCellDataxyz -time 1000 sigma.buoyant
 
 # animate the results
 #for field in theta sigma thetaU.stable thetaU.buoyant; do

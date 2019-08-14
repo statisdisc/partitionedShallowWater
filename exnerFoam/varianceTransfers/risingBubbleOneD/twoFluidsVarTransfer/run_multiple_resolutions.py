@@ -30,10 +30,10 @@ for i in xrange(len(dx)):
         
         #Grid properties
         if folders[j] == folder_oneCol:
-            xmax = max( 10, int(10*dx[i]/10000.) )
+            xmax = max( 10, int(10*dx[i]/20000.) )
             xmin = -xmax
         if folders[j] == folder_threeCols:
-            xmax = max( 30, int(30*dx[i]/10000.) )
+            xmax = max( 30, int(30*dx[i]/20000.) )
             xmin = -xmax
         nx = int( round( 1000*(xmax-xmin)/dx[i] ) )
         
