@@ -8,9 +8,9 @@ def bubble2D(x,z,xcentre,zcentre,radius):
 
 def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
     if len(x) == 1:
-        resolution_x = max( 1, int(200 * (xmax-xmin)/10.) )
+        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
     else:
-        resolution_x = max( 1, int(200 * (x[-1]-x[0])/(10.*len(x))) )
+        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
     resolution_z = 10
     
     dz = z[1] - z[0]
@@ -26,7 +26,7 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
             z_new = z[k] - dz/2. + dz*j*1./resolution_z
             for i in xrange(len(x)):
                 value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
-                if (value != 0. and abs(x[i]) <= 1.6) or mean == "all":
+                if value != 0. or mean == "all":
                     tally += 1
                     bubble_mean += value
             
@@ -48,9 +48,9 @@ def bubble1D_var(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
     bubble_mean = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,mean=mean)
     
     if len(x) == 1:
-        resolution_x = max( 1, int(200 * (xmax-xmin)/10.) )
+        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
     else:
-        resolution_x = max( 1, int(200 * (x[-1]-x[0])/(10.*len(x))) )
+        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
     resolution_z = 10
     
     dz = z[1] - z[0]
@@ -66,7 +66,7 @@ def bubble1D_var(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
             z_new = z[k] - dz/2. + dz*j*1./resolution_z
             for i in xrange(len(x)):
                 value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
-                if (value != 0. and abs(x[i]) <= 1.6) or mean == "all":
+                if value != 0. or mean == "all":
                     tally += 1
                     bubble_var += (value - bubble_mean[k])**2
             
@@ -86,9 +86,9 @@ def bubble2D_var(x,z,dx,xcentre,zcentre,radius,mean="all"):
     
 def bubble1D_sigma(x,z,xmin,xmax,xcentre,zcentre,radius):
     if len(x) == 1:
-        resolution_x = max( 1, int(200 * (xmax-xmin)/10.) )
+        resolution_x = max( 1, int(100 * (xmax-xmin)/10.) )
     else:
-        resolution_x = max( 1, int(200 * (x[-1]-x[0])/(10.*len(x))) )
+        resolution_x = max( 1, int(100 * (x[-1]-x[0])/(10.*len(x))) )
     resolution_z = 10
     
     dz = z[1] - z[0]
@@ -102,7 +102,7 @@ def bubble1D_sigma(x,z,xmin,xmax,xcentre,zcentre,radius):
         for j in xrange(resolution_z):
             z_new = z[k] - dz/2. + dz*j*1./resolution_z
             for i in xrange(len(x)):
-                if bubble2D(x[i],z_new,xcentre,zcentre,radius) != 0 and abs(x[i]) <= 1.6:
+                if bubble2D(x[i],z_new,xcentre,zcentre,radius) != 0:
                     bubble_sigma += 1.
             
         bubble[k] = bubble_sigma * 1./(len(x)*resolution_z)
