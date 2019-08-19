@@ -2,6 +2,14 @@ import sys
 import os
 import numpy as np
 
+dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
+dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
+dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
+dx = np.array([ 20000, 50000, 100000, 200000 ])
+# dx = np.array([ 20000 ])
+
+
+# folder_xyz = os.path.join(sys.path[0], "xyz_sigma_{}".format(str(sigma_array[k]).replace(".","_")))
 folder_xyz = os.path.join(sys.path[0], "xyzData")
 os.system( "rm -rf {}".format(folder_xyz) )
 os.makedirs( folder_xyz )
@@ -16,10 +24,6 @@ if not os.path.exists( folder_threeCols ):
 
 execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 
-dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
-dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
-dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
-# dx = np.array([ 10000 ])
 folders = [folder_oneCol, folder_threeCols]
 folders = [folder_oneCol]
 
@@ -54,19 +58,19 @@ for i in xrange(len(dx)):
         radius = 2.
         xcentre = 0.
         zcentre = 2.
-
-        write_blockMeshDict(xmin, xmax, nx)
-
+        
+        sigma = 0.12 * 20000./dx[i] * np.ones(len(z))
+        # for k in xrange(len(z)):
+            # if z[k] > 5:
+                # sigma[k] += 0.34 * ( 1. - (np.abs(10.-z[k])/5.)**2 ) * 20000./dx[i]
+        
         write_theta_field(x, z, dx[i]/1000., xcentre, zcentre, radius, base_temp)
-        write_thetaBuoyant_field(x, z, dx[i]/1000., xcentre, zcentre, radius, base_temp)
-        write_thetaStable_field(x, z, dx[i]/1000., xcentre, zcentre, radius, base_temp)
+        write_theta_fields(x, z, dx[i]/1000., xcentre, zcentre, radius, base_temp, sigma)
 
-        write_thetaVar_field(x, z, dx[i]/1000., xcentre, zcentre, radius)
-        write_thetaVarBuoyant_field(x, z, dx[i]/1000., xcentre, zcentre, radius)
-        write_thetaVarStable_field(x, z, dx[i]/1000., xcentre, zcentre, radius)
-
-        write_sigmaBuoyant_field(x, z, dx[i]/1000., xcentre, zcentre, radius)
-        write_sigmaStable_field(x, z, dx[i]/1000., xcentre, zcentre, radius)
+        write_sigmaBuoyant_field(x, z, dx[i]/1000., xcentre, zcentre, radius, sigma)
+        write_sigmaStable_field(x, z, dx[i]/1000., xcentre, zcentre, radius, sigma)
+        
+        write_blockMeshDict(xmin, xmax, nx)
 
         os.system( "./run.sh" )
         
