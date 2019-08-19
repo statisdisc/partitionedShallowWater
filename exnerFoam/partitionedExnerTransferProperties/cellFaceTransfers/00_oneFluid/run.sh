@@ -42,8 +42,7 @@ gmtFoam sigmaTheta -time $time
 #gv $time/sigmaTheta.pdf &
 
 # Solve Euler equations
-#partitionedExnerFoam >& log & sleep 0.01; tail -f log
-partitionedExnerFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
+multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
 
 # Plot theta and sigma
 for time in 100 1000; do
