@@ -43,7 +43,6 @@ time=0
 #gv $time/sigmaTheta.pdf &
 
 # Solve Euler equations
-#partitionedExnerFoam >& log & sleep 0.01; tail -f log
-multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
-
+#multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
+multiFluidFoamAdditionalTransfers
 

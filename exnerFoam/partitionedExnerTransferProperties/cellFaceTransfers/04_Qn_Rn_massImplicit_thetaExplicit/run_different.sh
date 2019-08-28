@@ -39,32 +39,10 @@ setFields
 
 # Plot initial conditions
 time=0
-gmtFoam sigmaTheta -time $time
+#gmtFoam sigmaTheta -time $time
 #gv $time/sigmaTheta.pdf &
 
 # Solve Euler equations
-#partitionedExnerFoam >& log & sleep 0.01; tail -f log
-multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
-
-# Plot theta and sigma
-for time in 100 1000; do
-    gmtFoam sigmaTheta -time $time
-    gv $time/sigmaTheta.pdf &
-done
-
-# animate the results
-for field in theta sigma; do
-    gmtFoam $field
-    eps2gif $field.gif 0/$field.pdf ??/$field.pdf ???/$field.pdf ????/$field.pdf
-done
-
-# Make links for animategraphics
-mkdir -p animategraphics
-for field in theta sigma; do
-    t=0
-    for time in [0-9] [0-9]?? [0-9]???; do
-        ln -s ../$time/$field.pdf animategraphics/${field}_$t.pdf
-        let t=$t+1
-    done
-done
+#multiFluidFoamAdditionalTransfers >& log & sleep 0.01; tail -f log
+multiFluidFoamAdditionalTransfers
 

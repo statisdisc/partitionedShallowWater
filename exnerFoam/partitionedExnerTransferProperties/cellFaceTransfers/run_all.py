@@ -1,12 +1,21 @@
-import os,sys
+import sys,os
 
-directory = sys.path[0]
+class cd:
+    """Context manager for changing the current working directory"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
 
-for subdir in os.listdir(directory):
-    dir = os.path.join(directory, subdir)
-    if os.path.isdir( dir ):
-        dat_file = os.path.join(subdir, "transferDiags.dat")
-        os.system( "cp {} ~/Dropbox/{}.dat".format(dat_file,subdir[3:]) )
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
         
-        dat_file = os.path.join(subdir, "diags.dat")
-        os.system( "cp {} ~/Dropbox/totEnergy_{}.dat".format(dat_file,subdir[3:]) )
+folders = sorted([d for d in os.listdir( sys.path[0] ) if os.path.isdir(d)])
+
+print os.getcwd()
+for folder in folders[1:]:
+    with cd( os.path.join(sys.path[0], folder) ):
+        #os.system("./run_different.sh")
+        os.system("./run_identical.sh")

@@ -22,7 +22,7 @@ if not os.path.exists( folder_threeCols ):
 # folder_initial_profiles = os.path.join(sys.path[0], "profiles")
 folder_initial_profiles = "/home/statisdisc/OpenFOAM/statisdisc/run/data/risingBubbleResolved/"
 
-dx = np.array([ 10000 ])
+dx = np.array([ 20000 ])
 folders = [folder_oneCol, folder_threeCols]
 folders = [folder_oneCol]
 
@@ -36,16 +36,16 @@ for i in xrange(len(dx)):
         
         #Grid properties
         if folders[j] == folder_oneCol:
-            xmax = max( 5, int(0.5*dx[i]/1000.) )
+            xmax = max( 10, int(10*dx[i]/20000.) )
             xmin = -xmax
         if folders[j] == folder_threeCols:
-            xmax = max( 5, int(1.5*dx[i]/1000.) )
+            xmax = max( 30, int(30*dx[i]/20000.) )
             xmin = -xmax
         nx = int( round( 1000*(xmax-xmin)/dx[i] ) )
         
         write_blockMeshDict(xmin, xmax, nx)
         
-        for k in xrange(20,920,20):
+        for k in xrange(20,1000,20):
             id = str(k)
             folder_k = os.path.join(folder_initial_profiles, id)
             folder_kp1 = os.path.join(folder_initial_profiles, str(k+dt))
@@ -64,7 +64,7 @@ for i in xrange(len(dx)):
             folder_data = os.path.join(sys.path[0], "1")
             os.system( "cp {} {}/".format( os.path.join(folder_data,"*.xyz"), folder_testCase ) )
         
-os.system( "cp -r {}/ ~/Dropbox/PhD/2019/04_April/".format(folder_xyz) )
+os.system( "cp -r {}/ ~/Dropbox/PhD/2019/".format(folder_xyz) )
     
 
 
