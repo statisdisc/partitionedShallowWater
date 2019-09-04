@@ -22,9 +22,9 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-cloudRadiusMax     cloudRadiusMax   [0 1 0 0 0]     1000;
-cloudRadiusMin     cloudRadiusMin   [0 1 0 0 0]     1;
-dragCoeff                                           0.01;
+cloudRadiusMax     cloudRadiusMax   [0 1 0 0 0]     4000;
+cloudRadiusMin     cloudRadiusMin   [0 1 0 0 0]     4000;
+dragCoeff                                           0.5;
 dragTransferCoeff                                   0;
 divCoeff                                            1;
 Ksigma Ksigma                       [0 2 -1 0 0]    0;//5e4;//2000;
@@ -51,7 +51,7 @@ wVarProductionSeparation                                1.;
 
 //Kw Kw [0 2 -1 0 0] 6e3;//4e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
-Kw Kw [0 0 1 0 0] 0.02;
+Kw Kw [0 0 1 0 0] 0.004;//0.02;
 
 wVarDiffusion                                           false;
 KwVariance          KwVariance          [0 2 -1 0 0]    2e6;
