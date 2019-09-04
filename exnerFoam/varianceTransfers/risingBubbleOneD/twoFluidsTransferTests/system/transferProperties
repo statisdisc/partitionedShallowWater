@@ -24,10 +24,10 @@ FoamFile
 
 cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 1000;
 cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 1;
-dragCoeff       1;
+dragCoeff       0;
 divCoeff        1;
 Ksigma Ksigma [0 2 -1 0 0] 1000;//2000;
-minSigma  1e-9;
+minSigma  1e-16;
 // Transfer between partitions based on horizontal divergence
 wTransfer false;
 divTransfer true;

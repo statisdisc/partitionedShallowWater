@@ -436,6 +436,9 @@ def make_field_files(id, folder, folder_new, z_oneColumn):
     write_field("rho.stable", "[1 -3 0 0 0 0 0]", rho_stable_binned[1:101])
     write_field("rho.buoyant", "[1 -3 0 0 0 0 0]", rho_buoyant_binned[1:101])
     
+    write_field("sigmaRhoInitial.stable", "[1 -3 0 0 0 0 0]", sigmaRho_stable_binned[1:101])
+    write_field("sigmaRhoInitial.buoyant", "[1 -3 0 0 0 0 0]", sigmaRho_buoyant_binned[1:101])
+    
     write_field("sigmaRhoExpected.stable", "[1 -3 0 0 0 0 0]", sigmaRho_stable_new_binned[1:101])
     write_field("sigmaRhoExpected.buoyant", "[1 -3 0 0 0 0 0]", sigmaRho_buoyant_new_binned[1:101])
     
