@@ -19,12 +19,12 @@ projection2D XZ;
 
 FieldsToPlot
 (
-    [theta.stable filledContours 0 0 0 "$GMTU/colours/white_blue_red.cpt"]
-    [u.stable    vectors 10 31 "black"]
+    [theta.stable filledContours 297.95 302.05 0.1 "$GMTU/colours/red_white_blue.cpt"]
+    [u.stable    vectors 30 31 "black"]
 );
 
 separateLegend true;
 region "-5000/5000/0/10000";
 annotate "minMax 250 350";
-boundaryMarks "500/500";
+boundaryMarks "2500/2500";
 plotBoundaryDots false;
