@@ -64,7 +64,7 @@ for i in xrange(len(dx)):
             folder_data = os.path.join(sys.path[0], "1")
             os.system( "cp {} {}/".format( os.path.join(folder_data,"*.xyz"), folder_testCase ) )
         
-os.system( "cp -r {}/ ~/Dropbox/PhD/2019/".format(folder_xyz) )
+os.system( "cp -r {}/ $DROPBOX/PhD/2019/".format(folder_xyz) )
     
 
 

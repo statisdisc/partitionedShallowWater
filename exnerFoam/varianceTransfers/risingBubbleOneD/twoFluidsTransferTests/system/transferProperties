@@ -22,8 +22,8 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 1000;
-cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 1;
+cloudRadiusMax     cloudRadiusMax [0 1 0 0 0] 2000;
+cloudRadiusMin     cloudRadiusMin [0 1 0 0 0] 2000;
 dragCoeff       1;
 divCoeff        1;
 Ksigma Ksigma [0 2 -1 0 0] 1000;//2000;

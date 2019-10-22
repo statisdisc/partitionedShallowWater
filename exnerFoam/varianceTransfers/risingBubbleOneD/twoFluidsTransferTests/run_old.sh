@@ -48,6 +48,8 @@ writeCellDataxyz massTransferSigmaDiffusion.stable.buoyant
 writeCellDataxyz massTransferSigmaDiffusion.buoyant.stable
 writeCellDataxyz massTransferThetaDiffusion.stable.buoyant
 writeCellDataxyz massTransferThetaDiffusion.buoyant.stable
+writeCellDataxyz massTransferEntrainment.stable.buoyant
+writeCellDataxyz massTransferEntrainment.buoyant.stable
                  
 writeCellDataxyz thetaTransferAnalyticMean.stable
 writeCellDataxyz thetaTransferAnalyticMean.buoyant
