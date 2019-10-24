@@ -16,15 +16,19 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean="all"):
     dz = z[1] - z[0]
     x = np.linspace(xmin,xmax,resolution_x)
     
+    sigma_index = max(1, int(sigma * resolution_z * len(x)))
     
-    
+    sigma_buoyant = np.zeros(len(z))
     mean_temp_stable = np.zeros(len(z))
     mean_temp_buoyant = np.zeros(len(z))
     var_temp_stable = np.zeros(len(z))
     var_temp_buoyant = np.zeros(len(z))
     
     for k in xrange(len(z)):
-        sigma_index = max(1, int(sigma[k] * resolution_z * len(x)))
+        hottest_temps = []
+        coolest_temps = []
+        sigma0 = 0
+        sigma1 = 0
         
         temperatures = np.zeros((resolution_z,len(x)))
         for j in xrange(resolution_z):
@@ -32,21 +36,30 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean="all"):
             z_new = z[k] - dz/2. + dz*j*1./resolution_z
             for i in xrange(len(x)):
                 value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
-                temperatures[j][i] = value
+                # temperatures[j][i] = value
+                if np.abs(x[i]) <= 2:
+                    hottest_temps.append(value)
+                    sigma1 += 1
+                else:
+                    coolest_temps.append(value)
+                    sigma0 += 1
         
-        temperatures = temperatures.flatten()
-        temperature_indices = np.argsort(temperatures)
-        hottest_temps = temperatures[temperature_indices[-sigma_index:]]
-        coolest_temps = temperatures[temperature_indices[:-sigma_index]]
+        # temperatures = temperatures.flatten()
+        # temperature_indices = np.argsort(temperatures)
+        # hottest_temps = temperatures[temperature_indices[-sigma_index:]]
+        # coolest_temps = temperatures[temperature_indices[:-sigma_index]]
+
         
-        mean_temp_stable[k] = np.mean(coolest_temps)
-        mean_temp_buoyant[k] = np.mean(hottest_temps)
-        var_temp_stable[k] = np.var(coolest_temps)
-        var_temp_buoyant[k] = np.var(hottest_temps)
+        sigma_buoyant[k] = sigma1/float(sigma0+sigma1)
+        mean_temp_stable[k] = np.mean( np.array(coolest_temps) )
+        mean_temp_buoyant[k] = np.mean( np.array(hottest_temps) )
+        var_temp_stable[k] = np.var( np.array(coolest_temps) )
+        var_temp_buoyant[k] = np.var( np.array(hottest_temps) )
             
-    return mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant
+    return sigma_buoyant, mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant
     
 def bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="all"):
+    sigma1 = np.zeros((len(z),len(x)))
     mean_stable = np.zeros((len(z),len(x)))
     mean_buoyant = np.zeros((len(z),len(x)))
     var_stable = np.zeros((len(z),len(x)))
@@ -55,13 +68,14 @@ def bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="all"):
     for i in xrange(len(x)):
         xmin = x[i] - 0.5*dx
         xmax = x[i] + 0.5*dx
-        mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean=mean)
+        sigma_buoyant, mean_temp_stable,mean_temp_buoyant,var_temp_stable,var_temp_buoyant = bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean=mean)
+        sigma1[:,i] = sigma_buoyant
         mean_stable[:,i] = mean_temp_stable
         mean_buoyant[:,i] = mean_temp_buoyant
         var_stable[:,i] = var_temp_stable
         var_buoyant[:,i] = var_temp_buoyant
         
-    return mean_stable,mean_buoyant,var_stable,var_buoyant
+    return sigma1,mean_stable,mean_buoyant,var_stable,var_buoyant
 
 def bubble1D_mean_singleFluid(x,z,xmin,xmax,xcentre,zcentre,radius,mean="all"):
     if len(x) == 1:
@@ -260,9 +274,7 @@ def write_sigmaBuoyant_field(x, z, dx, xcentre, zcentre, radius, sigma):
     name = "sigma.buoyant"
     dimensions = "[0 0 0 0 0 0 0]"
     
-    field = np.ones((len(z),len(x)))
-    for i in xrange(len(x)):
-        field[:,i] = sigma
+    field = sigma * np.ones((len(z),len(x)))
     
     write_field(name, dimensions, field)
     
@@ -270,11 +282,7 @@ def write_sigmaStable_field(x, z, dx, xcentre, zcentre, radius, sigma):
     name = "sigma.stable"
     dimensions = "[0 0 0 0 0 0 0]"
     
-    field = np.ones((len(z),len(x)))
-    for i in xrange(len(x)):
-        field[:,i] = 1.-sigma
-    
-    print field
+    field = (1 - sigma)*np.ones((len(z),len(x)))
     
     write_field(name, dimensions, field)
 
@@ -290,12 +298,14 @@ def write_theta_fields(x, z, dx, xcentre, zcentre, radius, base_temp, sigma):
     name = "theta.buoyant"
     dimensions = "[0 0 0 1 0 0 0]"
     
-    mean_stable,mean_buoyant,var_stable,var_buoyant = bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="split")
+    sigma_buoyant, mean_stable,mean_buoyant,var_stable,var_buoyant = bubble2D_mean(x,z,dx,xcentre,zcentre,radius,sigma,mean="split")
     mean_stable += base_temp
     mean_buoyant += base_temp
     
     field = base_temp + mean_buoyant
     
+    write_field("sigma.stable", "[0 0 0 0 0 0 0]", -sigma_buoyant + 1.)
+    write_field("sigma.buoyant", "[0 0 0 0 0 0 0]", sigma_buoyant)
     write_field("theta.stable", "[0 0 0 1 0 0 0]", mean_stable)
     write_field("theta.buoyant", "[0 0 0 1 0 0 0]", mean_buoyant)
     write_field("thetaVar.stable", "[0 0 0 2 0 0 0]", var_stable)
