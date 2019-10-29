@@ -1,9 +1,8 @@
-/*---------------------------------------------------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  1.4                                   |
-|   \\  /    A nd           | Web:      http://www.openfoam.org               |
-|    \\/     M anipulation  |                                                 |
+/*---------------------------------------------------------------------------*| =========                 |                                                 |
+| \      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \    /   O peration     | Version:  1.4                                   |
+|   \  /    A nd           | Web:      http://www.openfoam.org               |
+|    \/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 
 FoamFile
@@ -31,7 +30,7 @@ Ksigma Ksigma                       [0 2 -1 0 0]    0;//5e4;//2000;
 minSigma                                            1e-9;
 // Transfer between partitions based on horizontal divergence
 wTransfer                                               false;
-divTransfer                                             true;
+divTransfer                                             false;
 dragTransfer                                            false;
 // Transfer between partitions based on laplacian(theta)
 thetaTransfer                                           false;
@@ -42,7 +41,7 @@ thetaVarTransfer                                        false;
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
 wVarTransfer                                            false;
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
-wZeroTransfer                                           true;
+wZeroTransfer                                           false;
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
 
@@ -52,7 +51,7 @@ wVarProductionSeparation                                1.;
 
 //Kw Kw [0 2 -1 0 0] 6e3;//4e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
-Kw Kw [0 0 1 0 0] 0.07;//0.02;
+Kw Kw [0 0 1 0 0] 0.005;
 
 wVarDiffusion                                           false;
 KwVariance          KwVariance          [0 2 -1 0 0]    2e6;
