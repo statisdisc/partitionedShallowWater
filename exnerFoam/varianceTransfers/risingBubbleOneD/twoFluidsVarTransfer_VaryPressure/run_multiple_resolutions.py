@@ -10,7 +10,7 @@ dx = np.array([ 6666, 20000, 50000, 100000, 200000 ])
 # dx = np.array([ 20000 ])
 
 dgamma = 0.005
-gamma_array = np.arange(0.005,0.1+dgamma,dgamma)
+gamma_array = np.arange(0.,0.1+dgamma,dgamma)
 # x_sigma_lim = 1.2
 x_sigma_lim = 2.
 
@@ -107,7 +107,7 @@ for testcase in testcases:
 
     for k in xrange(len(gamma_array)):
         gamma = gamma_array[k]
-        k_string = str(k+1)
+        k_string = str(k)
         if len(k_string) == 1:
             k_string = "0" + k_string
         folder_basename = testcase["folder"].format( k_string, str(x_sigma_lim).replace(".","") )
