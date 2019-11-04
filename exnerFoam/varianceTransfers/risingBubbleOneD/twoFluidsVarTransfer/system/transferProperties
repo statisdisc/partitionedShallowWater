@@ -22,8 +22,8 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-cloudRadiusMax     cloudRadiusMax   [0 1 0 0 0]     4000;
-cloudRadiusMin     cloudRadiusMin   [0 1 0 0 0]     4000;
+cloudRadiusMax     cloudRadiusMax   [0 1 0 0 0]     2000;
+cloudRadiusMin     cloudRadiusMin   [0 1 0 0 0]     2000;
 dragCoeff                                           0;
 dragTransferCoeff                                   0.5;
 divCoeff                                            1;
@@ -47,7 +47,7 @@ localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
 
 wVarProduction                                          true;
-wVarProductionTimescale  wVarProductionTimescale [0 -1 2 0 0]  5;
+wVarProductionTimescale  wVarProductionTimescale [0 -1 2 0 0]  500;
 wVarProductionSeparation                                1.;
 
 //Kw Kw [0 2 -1 0 0] 6e3;//4e3;
