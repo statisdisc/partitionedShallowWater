@@ -57,6 +57,8 @@ writeCellDataxyz massTransferEntrainment.buoyant.stable
                  
 writeCellDataxyz thetaTransferAnalyticMean.stable
 writeCellDataxyz thetaTransferAnalyticMean.buoyant
+writeCellDataxyz thetaTransferAnalyticZero.stable
+writeCellDataxyz thetaTransferAnalyticZero.buoyant
 writeCellDataxyz thetaTransferAnalyticVar.stable
 writeCellDataxyz thetaTransferAnalyticVar.buoyant
 writeCellDataxyz thetaTransferAnalyticMeanVar.stable
@@ -82,6 +84,8 @@ writeCellDataxyz thetaTransferAnalyticMeanVar.buoyant
                  
 writeCellDataxyz thetaVarTransferAnalyticMean.stable
 writeCellDataxyz thetaVarTransferAnalyticMean.buoyant
+writeCellDataxyz thetaVarTransferAnalyticZero.stable
+writeCellDataxyz thetaVarTransferAnalyticZero.buoyant
 writeCellDataxyz thetaVarTransferAnalyticVar.stable
 writeCellDataxyz thetaVarTransferAnalyticVar.buoyant
 writeCellDataxyz thetaVarTransferAnalyticMeanVar.stable

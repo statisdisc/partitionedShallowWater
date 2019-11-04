@@ -37,22 +37,22 @@ dragTransfer                                            false;
 thetaTransfer                                           false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 
-directVarianceTransfer                                  false;
+directVarianceTransfer                                  true;
 thetaVarTransfer                                        false;
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
-wVarTransfer                                            false;
-wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
-wZeroTransfer                                           true;
+wVarTransfer                                            true;
+wVarTimescale       wVarTimeScale       [0 0 1 0 0]     20;
+wZeroTransfer                                           false;
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
 
-wVarProduction                                          false;
+wVarProduction                                          true;
 wVarProductionTimescale  wVarProductionTimescale [0 -1 2 0 0]  5;
 wVarProductionSeparation                                1.;
 
 //Kw Kw [0 2 -1 0 0] 6e3;//4e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
-Kw Kw [0 0 1 0 0] 0.07;//0.02;
+Kw Kw [0 0 1 0 0] 0.02;//0.02;
 
 wVarDiffusion                                           false;
 KwVariance          KwVariance          [0 2 -1 0 0]    2e6;

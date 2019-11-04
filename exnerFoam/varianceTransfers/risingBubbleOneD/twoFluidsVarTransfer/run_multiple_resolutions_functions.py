@@ -37,7 +37,7 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean="all"):
             for i in xrange(len(x)):
                 value = bubble2D(x[i],z_new,xcentre,zcentre,radius)
                 # temperatures[j][i] = value
-                if np.abs(x[i]) <= 2:
+                if np.abs(x[i]) <= 1.2:
                     hottest_temps.append(value)
                     sigma1 += 1
                 else:
