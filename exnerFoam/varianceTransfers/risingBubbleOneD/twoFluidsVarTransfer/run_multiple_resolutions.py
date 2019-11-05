@@ -2,10 +2,11 @@ import sys
 import os
 import numpy as np
 
-dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
-dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
-dx = np.array([ 20000, 50000, 100000, 200000 ])
+dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
+# dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
+# dx = np.array([ 20000, 50000, 100000, 200000 ])
 # dx = np.array([ 20000, 50000 ])
+#dx = np.array([ 6666 ])
 dx = np.array([ 20000 ])
 
 sigma_array = np.linspace(0.,0.2,21)
@@ -38,10 +39,10 @@ for k in xrange(len(sigma_array)):
             
             #Grid properties
             if folders[j] == folder_oneCol:
-                xmax = max( 5, int(0.5*dx[i]/1000.) )
+                xmax = max( 10, int(10*dx[i]/20000.) )
                 xmin = -xmax
             if folders[j] == folder_threeCols:
-                xmax = max( 5, int(1.5*dx[i]/1000.) )
+                xmax = max( 30, int(30*dx[i]/20000.) )
                 xmin = -xmax
             nx = int( round( 1000*(xmax-xmin)/dx[i] ) )
             

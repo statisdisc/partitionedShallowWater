@@ -44,11 +44,10 @@ def bubble1D_mean(x,z,xmin,xmax,xcentre,zcentre,radius,sigma,mean="all"):
                     coolest_temps.append(value)
                     sigma0 += 1
         
-        # temperatures = temperatures.flatten()
-        # temperature_indices = np.argsort(temperatures)
-        # hottest_temps = temperatures[temperature_indices[-sigma_index:]]
-        # coolest_temps = temperatures[temperature_indices[:-sigma_index]]
-
+        if coolest_temps == []:
+            coolest_temps.append(0)
+        if hottest_temps == []:
+            hottest_temps.append(0)
         
         sigma_buoyant[k] = sigma1/float(sigma0+sigma1)
         mean_temp_stable[k] = np.mean( np.array(coolest_temps) )

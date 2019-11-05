@@ -65,6 +65,8 @@ writeCellDataxyz wVar.stable
 writeCellDataxyz wVar.buoyant
 writeCellDataxyz sigma.stable
 writeCellDataxyz sigma.buoyant
+writeCellDataxyz rho.sigma.stable
+writeCellDataxyz rho.sigma.buoyant
 writeCellDataxyz dExnerdz.stable
 writeCellDataxyz dExnerdz.buoyant
 #writeCellDataxyz -time 1000 sigma.buoyant
