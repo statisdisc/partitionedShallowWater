@@ -72,7 +72,7 @@ solvers
 
 iterations
 {
-    nOuterCorrectors 2;
+    nOuterCorrectors 1;
     nCorrectors      2;
     nNonOrthogonalCorrectors 0;
 }

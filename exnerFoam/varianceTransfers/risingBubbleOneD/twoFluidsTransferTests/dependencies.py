@@ -91,7 +91,11 @@ def bin_data(z, z_ref, data):
         binned_data_tally[z_index] += 1
         
     binned_data *= 1./binned_data_tally
-    
+
+    #binned_data_temp = binned_data.copy()
+    #for k in xrange(2,len(z_ref)-2):
+    #    binned_data[k] = (0.5*binned_data_temp[k-2] + binned_data_temp[k-1] + binned_data_temp[k] + binned_data_temp[k+1] + 0.5*binned_data_temp[k+2])/4.
+
     return binned_data
     
 def bin_data_sigma(z, z_ref, data, sigma):
@@ -385,8 +389,10 @@ def make_field_files(id, folder, folder_new, z_oneColumn):
     x,y,z,theta = read_xyz_1d("theta.xyz", folder=folder)
     x,y,z,exner = read_xyz_1d("Exner.xyz", folder=folder)
     
-    sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.5)
-    sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.5)
+    #sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.5)
+    #sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.5)
+    sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.)
+    sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.)
     
     sigmaRho_stable = sigma_stable*rho
     sigmaRho_buoyant = sigma_buoyant*rho

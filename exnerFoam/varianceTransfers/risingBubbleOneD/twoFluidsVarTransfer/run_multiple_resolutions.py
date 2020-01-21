@@ -4,10 +4,10 @@ import numpy as np
 
 dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
 # dx = np.array([ 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])
-# dx = np.array([ 20000, 50000, 100000, 200000 ])
+dx = np.array([ 20000, 50000, 100000, 200000 ])
 # dx = np.array([ 20000, 50000 ])
-#dx = np.array([ 6666 ])
-dx = np.array([ 20000 ])
+# dx = np.array([ 6666, 20000 ])
+# dx = np.array([ 20000 ])
 
 sigma_array = np.linspace(0.,0.2,21)
 sigma_array = np.array([0.4])
@@ -30,7 +30,7 @@ for k in xrange(len(sigma_array)):
     execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 
     folders = [folder_oneCol, folder_threeCols]
-    folders = [folder_oneCol]
+    # folders = [folder_oneCol]
 
 
 

@@ -30,19 +30,37 @@ writeCellDataxyz theta.stable
 writeCellDataxyz theta.buoyant
 writeCellDataxyz thetaVar.stable
 writeCellDataxyz thetaVar.buoyant
-writeCellDataxyz thetaT.stable
-writeCellDataxyz thetaT.buoyant
 writeCellDataxyz u
 writeCellDataxyz u.stable
 writeCellDataxyz u.buoyant
 writeCellDataxyz wVar.stable
 writeCellDataxyz wVar.buoyant
-writeCellDataxyz wT.stable
-writeCellDataxyz wT.buoyant
 writeCellDataxyz sigma.stable
 writeCellDataxyz sigma.buoyant
 writeCellDataxyz rho.sigma.stable
 writeCellDataxyz rho.sigma.buoyant
+
+writeCellDataxyz thetaT.stable
+writeCellDataxyz thetaT.buoyant
+writeCellDataxyz thetaTAnalyticMean.stable
+writeCellDataxyz thetaTAnalyticMean.buoyant
+writeCellDataxyz thetaTAnalyticZero.stable
+writeCellDataxyz thetaTAnalyticZero.buoyant
+writeCellDataxyz thetaTAnalyticVar.stable
+writeCellDataxyz thetaTAnalyticVar.buoyant
+writeCellDataxyz thetaTAnalyticVarSmooth.stable
+writeCellDataxyz thetaTAnalyticVarSmooth.buoyant
+
+writeCellDataxyz wT.stable
+writeCellDataxyz wT.buoyant
+writeCellDataxyz wTAnalyticMean.stable
+writeCellDataxyz wTAnalyticMean.buoyant
+writeCellDataxyz wTAnalyticZero.stable
+writeCellDataxyz wTAnalyticZero.buoyant
+writeCellDataxyz wTAnalyticVar.stable
+writeCellDataxyz wTAnalyticVar.buoyant
+writeCellDataxyz wTAnalyticVarSmooth.stable
+writeCellDataxyz wTAnalyticVarSmooth.buoyant
 
 writeCellDataxyz massTransferAnalytic.stable.buoyant
 writeCellDataxyz massTransferAnalytic.buoyant.stable
@@ -61,6 +79,8 @@ writeCellDataxyz thetaTransferAnalyticZero.stable
 writeCellDataxyz thetaTransferAnalyticZero.buoyant
 writeCellDataxyz thetaTransferAnalyticVar.stable
 writeCellDataxyz thetaTransferAnalyticVar.buoyant
+writeCellDataxyz thetaTransferAnalyticVarSmooth.stable
+writeCellDataxyz thetaTransferAnalyticVarSmooth.buoyant
 writeCellDataxyz thetaTransferAnalyticMeanVar.stable
 writeCellDataxyz thetaTransferAnalyticMeanVar.buoyant
 #writeCellDataxyz thetaTransferDivMean.stable
@@ -88,6 +108,8 @@ writeCellDataxyz thetaVarTransferAnalyticZero.stable
 writeCellDataxyz thetaVarTransferAnalyticZero.buoyant
 writeCellDataxyz thetaVarTransferAnalyticVar.stable
 writeCellDataxyz thetaVarTransferAnalyticVar.buoyant
+writeCellDataxyz thetaVarTransferAnalyticVarSmooth.stable
+writeCellDataxyz thetaVarTransferAnalyticVarSmooth.buoyant
 writeCellDataxyz thetaVarTransferAnalyticMeanVar.stable
 writeCellDataxyz thetaVarTransferAnalyticMeanVar.buoyant
 #writeCellDataxyz thetaVarTransferDivMean.stable
@@ -113,6 +135,8 @@ writeCellDataxyz wTransferAnalyticMean.stable
 writeCellDataxyz wTransferAnalyticMean.buoyant
 writeCellDataxyz wTransferAnalyticVar.stable
 writeCellDataxyz wTransferAnalyticVar.buoyant
+writeCellDataxyz wTransferAnalyticVarSmooth.stable
+writeCellDataxyz wTransferAnalyticVarSmooth.buoyant
 writeCellDataxyz wTransferAnalyticMeanVar.stable
 writeCellDataxyz wTransferAnalyticMeanVar.buoyant
 writeCellDataxyz wTransferAnalyticZero.stable
@@ -146,6 +170,8 @@ writeCellDataxyz wVarTransferAnalyticMean.stable
 writeCellDataxyz wVarTransferAnalyticMean.buoyant
 writeCellDataxyz wVarTransferAnalyticVar.stable
 writeCellDataxyz wVarTransferAnalyticVar.buoyant
+writeCellDataxyz wVarTransferAnalyticVarSmooth.stable
+writeCellDataxyz wVarTransferAnalyticVarSmooth.buoyant
 writeCellDataxyz wVarTransferAnalyticMeanVar.stable
 writeCellDataxyz wVarTransferAnalyticMeanVar.buoyant
 writeCellDataxyz wVarTransferAnalyticZero.stable
