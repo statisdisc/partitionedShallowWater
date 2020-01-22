@@ -1,0 +1,6 @@
+/* dynamicCode:
+ * SHA1 = 813a50c402ef2c3ee93508a8ff923908489e9239
+ */
+fixedValueFvPatchFieldTemplate.C
+
+LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libfixedGradient_813a50c402ef2c3ee93508a8ff923908489e9239

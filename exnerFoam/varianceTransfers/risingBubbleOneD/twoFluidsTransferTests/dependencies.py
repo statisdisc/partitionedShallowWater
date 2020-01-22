@@ -366,6 +366,90 @@ boundaryField
     file.write( foam_string )
     file.close()
     
+def calculate_sigma(x, z, w, sigma_stable, sigma_buoyant):
+    x_min = -10000.
+    x_max =  10000.
+    nx = 200
+    dx = (x_max-x_min)/nx
+    x_domain = np.arange(x_min+0.5*dx, x_max, dx)
+    
+    z_min = 0.
+    z_max = 10000.
+    nz = 100
+    dz = (z_max-z_min)/nz
+    z_domain = np.arange(z_min+0.5*dz, z_max, dz)
+    
+    index_map = np.zeros((nz,nx), dtype=int)
+    w_field = np.zeros((nz,nx))
+    for k in xrange(len(w)):
+        j = np.argmin(np.abs(z_domain-z[k]))
+        i = np.argmin(np.abs(x_domain-x[k]))
+        index_map[j][i] = k
+        w_field[j][i] = w[k]
+        
+    gradw = np.zeros((nz,nx,2))
+    for j in xrange(nz):
+        gradw[j,:,0] = (np.roll(w_field[j], 1) - np.roll(w_field[j], -1))/(2*dx)
+    for i in xrange(nx):
+        gradw[:,i,1] = (np.roll(w_field[:,i], 1) - np.roll(w_field[:,i], -1))/(2*dz)
+        
+    xc = np.zeros((nz,nx,2))
+    for j in xrange(nz):
+        xc[j,:,0] = x_domain.copy()
+    for i in xrange(nx):
+        xc[:,i,1] = z_domain.copy()
+        
+    xv1 = np.zeros((nz,nx,2))
+    xv1[:,:,0] = xc[:,:,0] - 0.5*dx
+    xv1[:,:,1] = xc[:,:,1] + 0.5*dz
+    
+    xv2 = np.zeros((nz,nx,2))
+    xv2[:,:,0] = xc[:,:,0] + 0.5*dx
+    xv2[:,:,1] = xc[:,:,1] + 0.5*dz
+    
+    xv3 = np.zeros((nz,nx,2))
+    xv3[:,:,0] = xc[:,:,0] + 0.5*dx
+    xv3[:,:,1] = xc[:,:,1] - 0.5*dz
+    
+    xv4 = np.zeros((nz,nx,2))
+    xv4[:,:,0] = xc[:,:,0] - 0.5*dx
+    xv4[:,:,1] = xc[:,:,1] - 0.5*dz
+    
+    xw = xc.copy()
+    xw[:,:,0] -= w_field[:,:] * gradw[:,:,0]/(gradw[:,:,0]**2 + gradw[:,:,1]**2)
+    xw[:,:,1] -= w_field[:,:] * gradw[:,:,1]/(gradw[:,:,0]**2 + gradw[:,:,1]**2)
+    
+    vertices = [xv1, xv2, xv3, xv4]
+    sigma0 = np.ones((nz,nx))
+    sigma1 = np.zeros((nz,nx))
+    for j in xrange(nz):
+        for i in xrange(nx):
+            n0 = 0.
+            n1 = 0.
+            d0 = 0.
+            d1 = 0.
+            for vertex in vertices:
+                condition = np.dot( vertex[j,i]-xw[j,i], gradw[j][i] )
+                if condition > 0.:
+                    n1 += 1.
+                    d1 += condition/np.sqrt( np.dot(gradw[j][i], gradw[j][i]) )
+                else:
+                    n0 += 1.
+                    d0 -= condition/np.sqrt( np.dot(gradw[j][i], gradw[j][i]) )
+            
+            if n0 != 0.:
+                d0 *= 1./n0
+            if n1 != 0.:
+                d1 *= 1./n1
+            
+            sigma0 = d0/(d0+d1)
+            sigma1 = d1/(d0+d1)
+            
+            sigma_stable[index_map[j][i]] = sigma0
+            sigma_buoyant[index_map[j][i]] = sigma1
+            
+    return sigma_stable, sigma_buoyant
+    
 def diagnose_sigma(w, w_transition=0.5):
     sigma_stable = 1.*np.ones(len(w))
     sigma_buoyant = 0.*np.ones(len(w))
@@ -389,10 +473,16 @@ def make_field_files(id, folder, folder_new, z_oneColumn):
     x,y,z,theta = read_xyz_1d("theta.xyz", folder=folder)
     x,y,z,exner = read_xyz_1d("Exner.xyz", folder=folder)
     
+    sigma_stable = 0.9*np.ones(len(w))
+    sigma_buoyant = 0.1*np.ones(len(w))
+    sigma_stable_new = 0.9*np.ones(len(w))
+    sigma_buoyant_new = 0.1*np.ones(len(w))
     #sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.5)
     #sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.5)
-    sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.)
-    sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.)
+    # sigma_stable,sigma_buoyant = diagnose_sigma(w, w_transition=0.)
+    # sigma_stable_new,sigma_buoyant_new = diagnose_sigma(w_new, w_transition=0.)
+    sigma_stable,sigma_buoyant = calculate_sigma(x, z, w, sigma_stable.copy(), sigma_buoyant.copy())
+    sigma_stable_new,sigma_buoyant_new = calculate_sigma(x, z, w_new, sigma_stable.copy(), sigma_buoyant.copy())
     
     sigmaRho_stable = sigma_stable*rho
     sigmaRho_buoyant = sigma_buoyant*rho

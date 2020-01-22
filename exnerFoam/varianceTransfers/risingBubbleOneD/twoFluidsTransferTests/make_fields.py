@@ -45,8 +45,8 @@ for i in xrange(len(dx)):
         
         write_blockMeshDict(xmin, xmax, nx)
         
-        #for k in xrange(20,1000,20):
-        for k in xrange(1,1000,1):
+        for k in xrange(20,1000,20):
+        #for k in xrange(1,1000,1):
         #for k in xrange(20,100,20):
             id = str(k)
             folder_k = os.path.join(folder_initial_profiles, id)
