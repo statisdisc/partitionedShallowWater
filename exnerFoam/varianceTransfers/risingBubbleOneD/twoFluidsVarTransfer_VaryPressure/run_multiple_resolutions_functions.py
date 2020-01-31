@@ -297,7 +297,7 @@ mergePatchPairs
     
     
     
-def write_transferPropertiesDict(gamma, divTransfer, wZeroTransfer, wVarTransfer, directVarianceTransfer, wVarProduction):
+def write_transferPropertiesDict(gamma, divTransfer, wZeroTransfer, wVarTransfer, directVarianceTransfer, wVarProduction, thetaVarTransfer, thetaVarTransferSharp, thetaVarTransferSmooth):
     string = '''/*---------------------------------------------------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
@@ -338,7 +338,9 @@ thetaTransfer                                           false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 
 directVarianceTransfer                                  '''+directVarianceTransfer+''';
-thetaVarTransfer                                        false;
+thetaVarTransfer                                        '''+thetaVarTransfer+''';
+thetaVarTransferSharp                                   '''+thetaVarTransferSharp+''';
+thetaVarTransferSmooth                                  '''+thetaVarTransferSmooth+''';
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
 wVarTransfer                                            '''+wVarTransfer+''';
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
