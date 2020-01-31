@@ -40,6 +40,17 @@ writeCellDataxyz sigma.buoyant
 writeCellDataxyz rho.sigma.stable
 writeCellDataxyz rho.sigma.buoyant
 
+writeCellDataxyz sigmaRhoAdvection.stable
+writeCellDataxyz sigmaRhoAdvection.buoyant
+writeCellDataxyz thetaAdvection.stable
+writeCellDataxyz thetaAdvection.buoyant
+writeCellDataxyz uAdvection.stable
+writeCellDataxyz uAdvection.buoyant
+writeCellDataxyz uPressureGradient.stable
+writeCellDataxyz uPressureGradient.buoyant
+writeCellDataxyz uPressureGradientPrime.stable
+writeCellDataxyz uPressureGradientPrime.buoyant
+
 writeCellDataxyz thetaT.stable
 writeCellDataxyz thetaT.buoyant
 writeCellDataxyz thetaTAnalyticMean.stable
