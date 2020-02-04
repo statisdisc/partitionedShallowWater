@@ -38,10 +38,10 @@ thetaTransfer                                           false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 
 directVarianceTransfer                                  false;
-thetaTransferTotalMean                                  true;
-thetaVarTransfer                                        false;
+thetaTransferTotalMean                                  false;
+thetaVarTransfer                                        true;
 thetaVarTransferSharp                                   false;
-thetaVarTransferSmooth                                  false;
+thetaVarTransferSmooth                                  true;
 
 wZeroTransfer                                           true;
 
@@ -57,7 +57,7 @@ wVarProductionSeparation                                1.;
 
 //Kw Kw [0 2 -1 0 0] 6e3;//4e3;
 Ktheta Ktheta [0 2 -1 0 0] 0;
-Kw Kw [0 0 1 0 0] 0.06;//0.02;
+Kw Kw [0 0 1 0 0] 0.065;//0.02;
 
 wVarDiffusion                                           false;
 KwVariance          KwVariance          [0 2 -1 0 0]    4e3;

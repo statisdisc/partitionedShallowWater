@@ -297,7 +297,7 @@ mergePatchPairs
     
     
     
-def write_transferPropertiesDict(gamma, divTransfer, wZeroTransfer, wVarTransfer, directVarianceTransfer, wVarProduction, thetaVarTransfer, thetaVarTransferSharp, thetaVarTransferSmooth):
+def write_transferPropertiesDict(gamma, dict):
     string = '''/*---------------------------------------------------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
@@ -331,24 +331,25 @@ Ksigma Ksigma                       [0 2 -1 0 0]    0;//5e4;//2000;
 minSigma                                            1e-9;
 // Transfer between partitions based on horizontal divergence
 wTransfer                                               false;
-divTransfer                                             '''+divTransfer+''';
+divTransfer                                             '''+dict["divTransfer"]+''';
 dragTransfer                                            false;
 // Transfer between partitions based on laplacian(theta)
 thetaTransfer                                           false;
 thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
 
-directVarianceTransfer                                  '''+directVarianceTransfer+''';
-thetaVarTransfer                                        '''+thetaVarTransfer+''';
-thetaVarTransferSharp                                   '''+thetaVarTransferSharp+''';
-thetaVarTransferSmooth                                  '''+thetaVarTransferSmooth+''';
+directVarianceTransfer                                  '''+dict["directVarianceTransfer"]+''';
+thetaTransferTotalMean                                  '''+dict["thetaTransferTotalMean"]+''';
+thetaVarTransfer                                        '''+dict["thetaVarTransfer"]+''';
+thetaVarTransferSharp                                   '''+dict["thetaVarTransferSharp"]+''';
+thetaVarTransferSmooth                                  '''+dict["thetaVarTransferSmooth"]+''';
 thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
-wVarTransfer                                            '''+wVarTransfer+''';
+wVarTransfer                                            '''+dict["wVarTransfer"]+''';
 wVarTimescale       wVarTimeScale       [0 0 1 0 0]     0.01;
-wZeroTransfer                                           '''+wZeroTransfer+''';
+wZeroTransfer                                           '''+dict["wZeroTransfer"]+''';
 localThetaVarTransfer                                   false;
 varMassTransfer                                         false;
 
-wVarProduction                                          '''+wVarProduction+''';
+wVarProduction                                          '''+dict["wVarProduction"]+''';
 wVarProductionTimescale  wVarProductionTimescale [0 -1 2 0 0]  5;
 wVarProductionSeparation                                1.;
 
