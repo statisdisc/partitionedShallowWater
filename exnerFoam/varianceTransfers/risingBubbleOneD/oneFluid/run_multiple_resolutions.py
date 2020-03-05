@@ -2,7 +2,7 @@ import sys
 import os
 import numpy as np
 
-folder_xyz = os.path.join(sys.path[0], "xyzData")
+folder_xyz = os.path.join(sys.path[0], "xyzData_oneFluid")
 os.system( "rm -rf {}".format(folder_xyz) )
 os.makedirs( folder_xyz )
     
@@ -17,9 +17,10 @@ if not os.path.exists( folder_threeCols ):
 execfile(os.path.join(sys.path[0],"run_multiple_resolutions_functions.py"))
 
 dx = np.array([ 100, 200, 400, 1000, 2000, 3333, 10000, 50000, 100000, 200000 ])
-dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200000 ])[::-1]
+dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200000 ]) #[::-1]
 #dx = np.array([ 2000, 3333, 10000, 50000, 100000, 200000 ])
 #dx = np.array([ 100 ])
+dx = np.array([ 1000 ])
 folders = [folder_oneCol, folder_threeCols]
 folders = [folder_oneCol]
 
@@ -70,11 +71,15 @@ for i in xrange(len(dx)):
 
         os.system( "./run.sh" )
         
-        folder_testCase = os.path.join(folders[j], "dx_{}m".format(dx[i]))
-        if not os.path.exists( folder_testCase ):
-            os.makedirs( folder_testCase )
+        for time in xrange(0,1010,10):
+        #for time in xrange(1000,1010,10):
+            #folder_testCase = os.path.join(folders[j], "dx_{}m".format(dx[i]))
+            folder_testCase = os.path.join(folders[j], "dx_{}m_t{}".format(dx[i],time))
+            if not os.path.exists( folder_testCase ):
+                os.makedirs( folder_testCase )
         
-        folder_1000 = os.path.join(sys.path[0], "1000")
-        os.system( "cp {} {}/".format( os.path.join(folder_1000,"*.xyz"), folder_testCase ) )
+            folder_time = os.path.join(sys.path[0], str(time))
+            os.system( "cp {} {}/".format( os.path.join(folder_time,"*.xyz"), folder_testCase ) )
+        os.system( "cp {} {}/".format( os.path.join(sys.path[0],"*.dat"), folder_testCase ) )
         
-os.system( "cp -r {}/ ~/Dropbox/PhD/2019/".format(folder_xyz) )
+os.system( "cp -r {}/ ~/Dropbox/PhD/2020/".format(folder_xyz) )

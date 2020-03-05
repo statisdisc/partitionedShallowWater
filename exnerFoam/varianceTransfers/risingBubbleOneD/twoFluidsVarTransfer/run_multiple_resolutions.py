@@ -7,7 +7,7 @@ dx = np.array([ 100, 200, 400, 1000, 2000, 4000, 6666, 20000, 50000, 100000, 200
 # dx = np.array([ 20000, 50000, 100000, 200000 ])
 # dx = np.array([ 20000, 50000 ])
 # dx = np.array([ 6666, 20000 ])
-#dx = np.array([ 20000 ])
+dx = np.array([ 20000 ])
 
 sigma_array = np.linspace(0.,0.2,21)
 sigma_array = np.array([0.4])
@@ -82,6 +82,7 @@ for k in xrange(len(sigma_array)):
             
             folder_1000 = os.path.join(sys.path[0], "1000")
             os.system( "cp {} {}/".format( os.path.join(folder_1000,"*.xyz"), folder_testCase ) )
+            os.system( "cp {} {}/".format( os.path.join(folder_1000,"*.dat"), folder_testCase ) )
             
     # os.system( "cp -r {}/ ~/Dropbox/PhD/2019/04_April/".format(folder_xyz) )
     os.system( "cp -r {}/ $DROPBOX/PhD/2020/".format(folder_xyz) )

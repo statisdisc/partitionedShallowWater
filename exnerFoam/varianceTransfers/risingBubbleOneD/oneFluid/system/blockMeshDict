@@ -25,7 +25,7 @@ convertToMeters 1000;
 
 xmax  10;
 xmin -10;
-nx 200;
+nx 20;
 
 vertices
 (

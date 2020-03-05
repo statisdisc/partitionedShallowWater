@@ -1,0 +1,65 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "";
+    local           "";
+
+    class           dictionary;
+    object          environmentalProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+cloudRadiusMax     cloudRadiusMax   [0 1 0 0 0]     2000;
+cloudRadiusMin     cloudRadiusMin   [0 1 0 0 0]     2000;
+dragCoeff                                           0;
+dragTransferCoeff                                   0.5;
+divCoeff                                            1;
+Ksigma Ksigma                       [0 2 -1 0 0]    0;//5e4;//2000;
+minSigma                                            1e-9;
+// Transfer between partitions based on horizontal divergence
+wTransfer                                               false;
+divTransfer                                             true;
+dragTransfer                                            false;
+// Transfer between partitions based on laplacian(theta)
+thetaTransfer                                           false;
+thetaTransferDiffusivity thetaTransferDiffusivity  [0 2 -1 0 0] 0;//5e4;
+
+directVarianceTransfer                                  false;
+thetaTransferTotalMean                                  false;
+thetaVarTransfer                                        true;
+thetaVarTransferSharp                                   false;
+thetaVarTransferSmooth                                  true;
+
+wZeroTransfer                                           true;
+
+thetaVarTimescale   thetaVarTimeScale   [0 0 1 0 0]     0.01;
+wVarTransfer                                            false;
+wVarTimescale       wVarTimeScale       [0 0 1 0 0]     20;
+localThetaVarTransfer                                   false;
+varMassTransfer                                         false;
+
+wVarProduction                                          false;
+wVarProductionTimescale  wVarProductionTimescale [0 -1 2 0 0]  500;
+wVarProductionSeparation                                1.;
+
+//Kw Kw [0 2 -1 0 0] 6e3;//4e3;
+Ktheta Ktheta [0 2 -1 0 0] 0;
+Kw Kw [0 0 1 0 0] 0.065;//0.02;
+
+wVarDiffusion                                           false;
+KwVariance          KwVariance          [0 2 -1 0 0]    4e3;
+
+// ************************************************************************* //
