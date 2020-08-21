@@ -16,10 +16,10 @@ FoamFile
 
 defaultFieldValues
 (
-    //volScalarFieldValue sigma.stable 0
-    //volScalarFieldValue sigma.buoyant 1
-    volScalarFieldValue sigma.stable 1
-    volScalarFieldValue sigma.buoyant 0
+    volScalarFieldValue sigma.stable 0
+    volScalarFieldValue sigma.buoyant 1
+    //volScalarFieldValue sigma.stable 1
+    //volScalarFieldValue sigma.buoyant 0
 );
 
 regions
@@ -32,10 +32,10 @@ regions
         
         fieldValues
         (
-            //volScalarFieldValue sigma.stable 0
-            //volScalarFieldValue sigma.buoyant 1
-            volScalarFieldValue sigma.stable 0.5
-            volScalarFieldValue sigma.buoyant 0.5
+            volScalarFieldValue sigma.stable 0
+            volScalarFieldValue sigma.buoyant 1
+            //volScalarFieldValue sigma.stable 0.5
+            //volScalarFieldValue sigma.buoyant 0.5
         );
     }
 );

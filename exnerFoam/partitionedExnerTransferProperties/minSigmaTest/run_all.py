@@ -18,6 +18,8 @@ print os.getcwd()
 for folder in folders[1:]:
     with cd( os.path.join(sys.path[0], folder) ):
         os.system("./run_different.sh")
+        os.system("writeCellDataxyz theta")
+        os.system("writeCellDataxyz u")
         #os.system("./run_identical.sh")
         
         #os.system("python cp_all.py")

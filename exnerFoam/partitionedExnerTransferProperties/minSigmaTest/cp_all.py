@@ -16,5 +16,6 @@ for folder in folders:
             os.makedirs(new_folder)
             
         os.system( "cp {}/*.dat {}/".format(testcase_folder, new_folder) )
+        os.system( "cp {}/1000/*.xyz {}/".format(testcase_folder, new_folder) )
 
 os.system( "cp -r {}/ $DROPBOX/PhD/2019/".format(data_folder) )
